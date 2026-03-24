@@ -63,14 +63,14 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
-/* SERVICES - stacking cards on scroll */
+/* SERVICES - stacking cards with scale-down (scroll-driven) */
 .services-wrapper { position: relative; }
-.services-stack { display: flex; flex-direction: column; gap: 0; position: relative; min-height: 320px; }
-.srv-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; position: sticky; top: 80px; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-.srv-card:nth-child(1) { top: 80px; z-index: 1; }
-.srv-card:nth-child(2) { top: 96px; z-index: 2; }
-.srv-card:nth-child(3) { top: 112px; z-index: 3; }
-.srv-card + .srv-card { margin-top: -40px; }
+.services-stack { display: flex; flex-direction: column; gap: 0; position: relative; padding-bottom: calc(var(--numcards, 3) * 20px); }
+.srv-card { padding-top: 20px; }
+.srv-card-content { position: sticky; top: 80px; background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform-origin: center top; transition: box-shadow 0.3s ease; }
+.srv-card:nth-child(1) .srv-card-content { top: 80px; }
+.srv-card:nth-child(2) .srv-card-content { top: 100px; }
+.srv-card:nth-child(3) .srv-card-content { top: 120px; }
 .srv-img { height: auto; min-height: 130px; background: #252550; display: flex; align-items: center; justify-content: center; }
 .srv-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
 .srv-body { padding: 18px 20px; display: flex; flex-direction: column; justify-content: center; }
@@ -327,7 +327,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   <div class="section-pad">
     <div style="padding: 0 0 6px;">
       <span class="section-label">Services section</span>
-      <span class="annot" style="margin-left:8px;">UPDATE - the current cards style to stacking cards on scroll</span>
+      <span class="annot" style="margin-left:8px;">Updated — stacking cards with scale-down (scroll-driven)</span>
     </div>
     <div class="sec-heading">
       <h2>Our services</h2>
@@ -335,44 +335,50 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
       <div class="u-line"></div>
     </div>
     <div class="services-wrapper">
-      <div class="services-stack">
+      <div class="services-stack" id="servicesStack">
         <div class="srv-card">
-          <div class="srv-img">
-            <div class="srv-icon" style="background:rgba(128,0,32,0.15);border:0.5px solid rgba(128,0,32,0.3);">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#b8445a" stroke-width="1.2"/><circle cx="11" cy="7" r="2" fill="#b8445a" opacity="0.7"/><circle cx="6" cy="15" r="2" fill="#b8445a" opacity="0.5"/><circle cx="16" cy="15" r="2" fill="#b8445a" opacity="0.5"/><line x1="11" y1="9" x2="6" y2="13" stroke="#b8445a" stroke-width="0.8" opacity="0.6"/><line x1="11" y1="9" x2="16" y2="13" stroke="#b8445a" stroke-width="0.8" opacity="0.6"/></svg>
+          <div class="srv-card-content">
+            <div class="srv-img">
+              <div class="srv-icon" style="background:rgba(128,0,32,0.15);border:0.5px solid rgba(128,0,32,0.3);">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#b8445a" stroke-width="1.2"/><circle cx="11" cy="7" r="2" fill="#b8445a" opacity="0.7"/><circle cx="6" cy="15" r="2" fill="#b8445a" opacity="0.5"/><circle cx="16" cy="15" r="2" fill="#b8445a" opacity="0.5"/><line x1="11" y1="9" x2="6" y2="13" stroke="#b8445a" stroke-width="0.8" opacity="0.6"/><line x1="11" y1="9" x2="16" y2="13" stroke="#b8445a" stroke-width="0.8" opacity="0.6"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="srv-body">
-            <div class="srv-tag">UC &amp; AV</div>
-            <div class="srv-title">Unified Communication &amp; Audiovisual</div>
-            <div class="srv-desc">Seamless communication environments and immersive audiovisual experiences that connect teams across locations.</div>
-            <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+            <div class="srv-body">
+              <div class="srv-tag">UC &amp; AV</div>
+              <div class="srv-title">Unified Communication &amp; Audiovisual</div>
+              <div class="srv-desc">Seamless communication environments and immersive audiovisual experiences that connect teams across locations.</div>
+              <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+            </div>
           </div>
         </div>
         <div class="srv-card">
-          <div class="srv-img">
-            <div class="srv-icon" style="background:rgba(55,138,221,0.12);border:0.5px solid rgba(55,138,221,0.25);">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="7" width="16" height="10" rx="2" stroke="#378ADD" stroke-width="1.2"/><path d="M7 7V5a4 4 0 0 1 8 0v2" stroke="#378ADD" stroke-width="1.2"/><circle cx="11" cy="12" r="1.5" fill="#378ADD" opacity="0.8"/></svg>
+          <div class="srv-card-content">
+            <div class="srv-img">
+              <div class="srv-icon" style="background:rgba(55,138,221,0.12);border:0.5px solid rgba(55,138,221,0.25);">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="7" width="16" height="10" rx="2" stroke="#378ADD" stroke-width="1.2"/><path d="M7 7V5a4 4 0 0 1 8 0v2" stroke="#378ADD" stroke-width="1.2"/><circle cx="11" cy="12" r="1.5" fill="#378ADD" opacity="0.8"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="srv-body">
-            <div class="srv-tag">Security</div>
-            <div class="srv-title">Networking and Security</div>
-            <div class="srv-desc">Robust network infrastructure and comprehensive security services ensuring seamless operations and protection.</div>
-            <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+            <div class="srv-body">
+              <div class="srv-tag">Security</div>
+              <div class="srv-title">Networking and Security</div>
+              <div class="srv-desc">Robust network infrastructure and comprehensive security services ensuring seamless operations and protection.</div>
+              <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+            </div>
           </div>
         </div>
         <div class="srv-card">
-          <div class="srv-img">
-            <div class="srv-icon" style="background:rgba(29,158,117,0.12);border:0.5px solid rgba(29,158,117,0.25);">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="11" rx="2" stroke="#1D9E75" stroke-width="1.2"/><path d="M8 18h6M11 15v3" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/><path d="M7 9h2M7 12h8" stroke="#1D9E75" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/></svg>
+          <div class="srv-card-content">
+            <div class="srv-img">
+              <div class="srv-icon" style="background:rgba(29,158,117,0.12);border:0.5px solid rgba(29,158,117,0.25);">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="11" rx="2" stroke="#1D9E75" stroke-width="1.2"/><path d="M8 18h6M11 15v3" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/><path d="M7 9h2M7 12h8" stroke="#1D9E75" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="srv-body">
-            <div class="srv-tag">Development</div>
-            <div class="srv-title">Software Development</div>
-            <div class="srv-desc">Innovative software solutions that drive business growth and efficiency, tailored to your unique needs.</div>
-            <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+            <div class="srv-body">
+              <div class="srv-tag">Development</div>
+              <div class="srv-title">Software Development</div>
+              <div class="srv-desc">Innovative software solutions that drive business growth and efficiency, tailored to your unique needs.</div>
+              <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+            </div>
           </div>
         </div>
       </div>
@@ -604,19 +610,50 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// Services stacking cards - shadow depth on scroll
-window.addEventListener('scroll', function() {
-  var cards = document.querySelectorAll('.srv-card');
-  cards.forEach(function(card) {
-    var rect = card.getBoundingClientRect();
-    var distFromTop = rect.top - 80;
-    if (distFromTop < 20) {
-      card.style.boxShadow = '0 8px 28px rgba(0,0,0,0.3)';
-    } else {
-      card.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
-    }
-  });
-});
+// Services stacking cards — scale down when pinned
+(function() {
+  var stack = document.getElementById('servicesStack');
+  var cards = document.querySelectorAll('.srv-card-content');
+  var numCards = cards.length;
+  stack.style.setProperty('--numcards', numCards);
+
+  if ('ViewTimeline' in window) {
+    var viewTimeline = new ViewTimeline({ subject: stack, axis: 'block' });
+    cards.forEach(function(card, i) {
+      var reverseIndex0 = numCards - i - 1;
+      card.animate(
+        { transform: ['scale(1)', 'scale(' + (1 - 0.05 * reverseIndex0) + ')'] },
+        {
+          timeline: viewTimeline,
+          fill: 'forwards',
+          rangeStart: 'exit-crossing ' + (i / numCards * 100) + '%',
+          rangeEnd: 'exit-crossing ' + ((i + 1) / numCards * 100) + '%',
+        }
+      );
+    });
+  } else {
+    window.addEventListener('scroll', function() {
+      var stackRect = stack.getBoundingClientRect();
+      var stackHeight = stack.offsetHeight;
+      var viewH = window.innerHeight || document.documentElement.clientHeight;
+      var scrolled = viewH - stackRect.top;
+      var progress = Math.max(0, Math.min(1, scrolled / (stackHeight + viewH)));
+      cards.forEach(function(card, i) {
+        var reverseIndex0 = numCards - i - 1;
+        var cardStart = i / numCards;
+        var cardEnd = (i + 1) / numCards;
+        var cardProgress = Math.max(0, Math.min(1, (progress - cardStart) / (cardEnd - cardStart)));
+        var scale = 1 - 0.05 * reverseIndex0 * cardProgress;
+        card.style.transform = 'scale(' + scale + ')';
+        if (cardProgress > 0.1) {
+          card.style.boxShadow = '0 8px 28px rgba(0,0,0,0.3)';
+        } else {
+          card.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)';
+        }
+      });
+    });
+  }
+})();
 
 // Back to top visibility
 var backToTopBtn = document.getElementById('backToTop');
