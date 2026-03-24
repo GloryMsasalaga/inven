@@ -63,31 +63,76 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
-/* SERVICES - Enhanced stacking cards scroll-down animations */
-.services-wrapper { position: relative; }
-.services-stack { display: flex; flex-direction: column; gap: 60px; position: relative; padding: 60px 0; }
-.srv-card { position: relative; scroll-margin-top: 120px; animation: card-enter ease-out both; animation-timeline: scroll(nearest); margin-bottom: 24px; }
-.srv-card:nth-child(1) { animation-range: entry 0% cover 30%; }
-.srv-card:nth-child(2) { animation-range: entry 0% cover 30%; }
-.srv-card:nth-child(3) { animation-range: entry 0% cover 30%; }
-.srv-card-content { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 140px 1fr; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform-origin: center; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; }
-.srv-card-content:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.35); transform: translateY(-8px); border-color: rgba(26,26,62,0.4); }
-.srv-card-content::after { content: ''; position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; background: rgba(128,0,32,0.06); border: 0.5px solid rgba(128,0,32,0.1); pointer-events: none; transition: all 0.6s ease; }
-.srv-card-content:hover::after { transform: scale(1.3) rotate(45deg); opacity: 1; }
-.srv-card:nth-child(2) .srv-card-content::after { background: rgba(55,138,221,0.06); border-color: rgba(55,138,221,0.1); top: auto; bottom: -20px; right: -20px; }
-.srv-card:nth-child(3) .srv-card-content::after { background: rgba(29,158,117,0.06); border-color: rgba(29,158,117,0.1); top: -20px; right: auto; left: -25px; }
-@keyframes card-enter {
-  0% { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(4px); }
-  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+/* SERVICES - Enhanced stacking cards scroll-down animations with colors and sidebar */
+.root {
+  --cards: 6;
+  --cardHeight: 87vh;
+  --cardTopPadding: 1.5em;
+  --cardMargin: 4vw;
 }
-.srv-img { height: auto; min-height: 160px; background: #252550; display: flex; align-items: center; justify-content: center; }
-.srv-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-.srv-body { padding: 28px 28px; display: flex; flex-direction: column; justify-content: center; }
-.srv-tag { font-size: 9px; color: #b8445a; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.srv-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; line-height: 1.3; }
-.srv-desc { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 12px; }
-.srv-link { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #b8445a; font-weight: 500; }
-.srv-link-arrow { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #b8445a; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #b8445a; }
+.container {
+  width:90%;
+  margin:0 auto;
+}
+#cards {
+  list-style:none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(var(--cards), var(--cardHeight));
+  gap: var(--cardMargin);
+  padding-bottom: calc(var(--cards) * var(--cardTopPadding));
+  margin-bottom: var(--cardMargin);
+}
+#card1 {
+  --index1: 1;
+}
+#card2 {
+  --index1: 2;
+}
+#card3 {
+  --index1: 3;
+}
+#card4 {
+  --index1: 4;
+}
+#card5 {
+  --index1: 5;
+}
+#card6 {
+  --index1: 6;
+}
+#card1 .card-body {
+  background-color: #12122e;
+}
+#card2 .card-body {
+  background-color: #5c0018;
+}
+#card3 .card-body {
+  background-color: #f5f5f5;
+}
+#card4 .card-body {
+  background-color: #185FA5;
+}
+#card5 .card-body {
+  background-color:blue;
+}
+#card6 .card-body {
+  background-color: #12122e;
+}
+.card-body {
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: 50px;
+  box-shadow: 0 0 30px 0 rgba(0,0,0,0.3);
+  height: var(--cardHeight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h2 {
+  font-size: 2.5em;
+}
 
 /* NEWS */
 .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
@@ -333,66 +378,41 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   </div>
 
   <!-- SERVICES -->
-  <div class="section-pad">
-    <div style="padding: 0 0 6px;">
-      <span class="section-label">Services section</span>
-      <span class="annot" style="margin-left:8px;">Updated — CSS scroll-timeline + animation-timeline driven cards</span>
-    </div>
-    <div class="sec-heading">
-      <h2>Our services</h2>
-      <p>Comprehensive IT solutions tailored to your business needs</p>
-      <div class="u-line"></div>
-    </div>
-    <div class="services-wrapper">
-      <div class="services-stack" id="servicesStack">
-        <div class="srv-card">
-          <div class="srv-card-content">
-            <div class="srv-img">
-              <div class="srv-icon" style="background:rgba(128,0,32,0.15);border:0.5px solid rgba(128,0,32,0.3);">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#b8445a" stroke-width="1.2"/><circle cx="11" cy="7" r="2" fill="#b8445a" opacity="0.7"/><circle cx="6" cy="15" r="2" fill="#b8445a" opacity="0.5"/><circle cx="16" cy="15" r="2" fill="#b8445a" opacity="0.5"/><line x1="11" y1="9" x2="6" y2="13" stroke="#b8445a" stroke-width="0.8" opacity="0.6"/><line x1="11" y1="9" x2="16" y2="13" stroke="#b8445a" stroke-width="0.8" opacity="0.6"/></svg>
-              </div>
-            </div>
-            <div class="srv-body">
-              <div class="srv-tag">UC &amp; AV</div>
-              <div class="srv-title">Unified Communication &amp; Audiovisual</div>
-              <div class="srv-desc">Seamless communication environments and immersive audiovisual experiences that connect teams across locations.</div>
-              <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
-            </div>
-          </div>
+  <div class="container">
+    <ul id="cards">
+      <li class="card" id="card1">
+        <div class="card-body">
+          <h2>Card 1</h2>
         </div>
-        <div class="srv-card">
-          <div class="srv-card-content">
-            <div class="srv-img">
-              <div class="srv-icon" style="background:rgba(55,138,221,0.12);border:0.5px solid rgba(55,138,221,0.25);">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="7" width="16" height="10" rx="2" stroke="#378ADD" stroke-width="1.2"/><path d="M7 7V5a4 4 0 0 1 8 0v2" stroke="#378ADD" stroke-width="1.2"/><circle cx="11" cy="12" r="1.5" fill="#378ADD" opacity="0.8"/></svg>
-              </div>
-            </div>
-            <div class="srv-body">
-              <div class="srv-tag">Security</div>
-              <div class="srv-title">Networking and Security</div>
-              <div class="srv-desc">Robust network infrastructure and comprehensive security services ensuring seamless operations and protection.</div>
-              <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
-            </div>
-          </div>
+      </li>
+      <li class="card" id="card2">
+        <div class="card-body">
+          <h2>Card 2</h2>
         </div>
-        <div class="srv-card">
-          <div class="srv-card-content">
-            <div class="srv-img">
-              <div class="srv-icon" style="background:rgba(29,158,117,0.12);border:0.5px solid rgba(29,158,117,0.25);">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="11" rx="2" stroke="#1D9E75" stroke-width="1.2"/><path d="M8 18h6M11 15v3" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/><path d="M7 9h2M7 12h8" stroke="#1D9E75" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/></svg>
-              </div>
-            </div>
-            <div class="srv-body">
-              <div class="srv-tag">Development</div>
-              <div class="srv-title">Software Development</div>
-              <div class="srv-desc">Innovative software solutions that drive business growth and efficiency, tailored to your unique needs.</div>
-              <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
-            </div>
-          </div>
+      </li>
+      <li class="card" id="card3">
+        <div class="card-body">
+          <h2>Card 3</h2>
         </div>
-      </div>
-    </div>
+      </li>
+      <li class="card" id="card4">
+        <div class="card-body">
+          <h2>Card 4</h2>
+        </div>
+      </li>
+      <li class="card" id="card5">
+        <div class="card-body">
+          <h2>Card 5</h2>
+        </div>
+      </li>
+      <li class="card" id="card6">
+        <div class="card-body">
+          <h2>Card 6</h2>
+        </div>
+      </li>
+    </ul>
   </div>
+  <!---SERVICE ENDS here -->
 
   <!-- NEWS -->
   <div class="section-pad">
@@ -673,6 +693,30 @@ window.addEventListener('scroll', function() {
     backToTopBtn.classList.remove('visible');
   }
 });
+
+// Service cards scroll animation with Intersection Observer
+(function() {
+  var serviceCards = document.querySelectorAll('.srv-card');
+  if (serviceCards.length === 0) return;
+  
+  var observerOptions = {
+    root: null,
+    rootMargin: '-100px 0px -100px 0px',
+    threshold: 0
+  };
+  
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+  
+  serviceCards.forEach(function(card) {
+    observer.observe(card);
+  });
+})();
 </script>
 </body>
 </html>
