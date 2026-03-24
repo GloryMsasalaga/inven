@@ -63,32 +63,26 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
-/* SERVICES - stacking cards with CSS scroll-driven animations */
-.services-wrapper { position: relative; scroll-timeline: --services-timeline block; }
-.services-stack { display: flex; flex-direction: column; gap: 0; position: relative; padding-bottom: calc(var(--numcards, 3) * 20px); }
-.srv-card { padding-top: 20px; position: relative; }
-.srv-card-content { position: sticky; top: 80px; background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform-origin: center top; transition: box-shadow 0.3s ease; animation: srv-bg-shift linear both; animation-timeline: scroll(nearest block); }
-.srv-card:nth-child(1) .srv-card-content { top: 80px; }
-.srv-card:nth-child(2) .srv-card-content { top: 100px; }
-.srv-card:nth-child(3) .srv-card-content { top: 120px; }
-.srv-card-content::after { content: ''; position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; background: rgba(128,0,32,0.06); border: 0.5px solid rgba(128,0,32,0.1); pointer-events: none; animation: srv-shape-float linear both; animation-timeline: --services-timeline; }
+/* SERVICES - Enhanced stacking cards scroll-down animations */
+.services-wrapper { position: relative; }
+.services-stack { display: flex; flex-direction: column; gap: 60px; position: relative; padding: 60px 0; }
+.srv-card { position: relative; scroll-margin-top: 120px; animation: card-enter ease-out both; animation-timeline: scroll(nearest); margin-bottom: 24px; }
+.srv-card:nth-child(1) { animation-range: entry 0% cover 30%; }
+.srv-card:nth-child(2) { animation-range: entry 0% cover 30%; }
+.srv-card:nth-child(3) { animation-range: entry 0% cover 30%; }
+.srv-card-content { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 140px 1fr; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform-origin: center; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; }
+.srv-card-content:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.35); transform: translateY(-8px); border-color: rgba(26,26,62,0.4); }
+.srv-card-content::after { content: ''; position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; background: rgba(128,0,32,0.06); border: 0.5px solid rgba(128,0,32,0.1); pointer-events: none; transition: all 0.6s ease; }
+.srv-card-content:hover::after { transform: scale(1.3) rotate(45deg); opacity: 1; }
 .srv-card:nth-child(2) .srv-card-content::after { background: rgba(55,138,221,0.06); border-color: rgba(55,138,221,0.1); top: auto; bottom: -20px; right: -20px; }
 .srv-card:nth-child(3) .srv-card-content::after { background: rgba(29,158,117,0.06); border-color: rgba(29,158,117,0.1); top: -20px; right: auto; left: -25px; }
-@keyframes srv-bg-shift {
-  0% { background: #1a1a3e; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
-  40% { background: #1e1e45; box-shadow: 0 6px 22px rgba(0,0,0,0.25); }
-  70% { background: #22224d; box-shadow: 0 8px 28px rgba(0,0,0,0.3); }
-  100% { background: #1a1a3e; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+@keyframes card-enter {
+  0% { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
-@keyframes srv-shape-float {
-  0% { transform: scale(0.6) rotate(0deg); opacity: 0; }
-  30% { transform: scale(1) rotate(45deg); opacity: 1; }
-  70% { transform: scale(1.15) rotate(90deg); opacity: 0.8; }
-  100% { transform: scale(0.8) rotate(135deg); opacity: 0; }
-}
-.srv-img { height: auto; min-height: 130px; background: #252550; display: flex; align-items: center; justify-content: center; }
-.srv-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-.srv-body { padding: 18px 20px; display: flex; flex-direction: column; justify-content: center; }
+.srv-img { height: auto; min-height: 160px; background: #252550; display: flex; align-items: center; justify-content: center; }
+.srv-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.srv-body { padding: 28px 28px; display: flex; flex-direction: column; justify-content: center; }
 .srv-tag { font-size: 9px; color: #b8445a; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
 .srv-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; line-height: 1.3; }
 .srv-desc { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 12px; }
