@@ -154,14 +154,15 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   position: sticky;
   top: 60px;
   padding-top: 0;
+  z-index: 10;
 }
 
-#card1 { --index1: 1; }
-#card2 { --index1: 2; }
-#card3 { --index1: 3; }
-#card4 { --index1: 4; }
-#card5 { --index1: 5; }
-#card6 { --index1: 6; }
+#card1 { --index1: 1; z-index: 60; }
+#card2 { --index1: 2; z-index: 50; }
+#card3 { --index1: 3; z-index: 40; }
+#card4 { --index1: 4; z-index: 30; }
+#card5 { --index1: 5; z-index: 20; }
+#card6 { --index1: 6; z-index: 10; }
 
 #card1 .card-body { background-color: #12122e; }
 #card2 .card-body { background-color: #5c0018; }
@@ -182,8 +183,9 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   gap: 40px;
   align-items: center;
   color: #fff;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.1s ease, opacity 0.1s ease, filter 0.1s ease;
   overflow: hidden;
+  transform-origin: center center;
 }
 
 /* Card Left Side - Text Content */
@@ -884,7 +886,7 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// Services: Sidebar sync and background color transitions
+// Services: Sidebar sync, background color transitions, and stacking effect
 (function() {
   var servicesWrapper = document.getElementById('servicesWrapper');
   var cards = document.querySelectorAll('.card');
@@ -904,24 +906,25 @@ resetAutoSlide();
     });
   });
 
-  // Scroll listener for sidebar sync and background color transitions
+  // Scroll listener for sidebar sync, background color transitions, and stacking effect
   window.addEventListener('scroll', function() {
-    var scrollPosition = window.scrollY + 200; // Offset for better detection
+    var scrollPos = window.pageYOffset;
     var activeCard = null;
     var activeColor = '#f0f0f0';
 
-    // Find which card is currently in view
+    // Find which card should be active based on viewport position
     cards.forEach(function(card, index) {
-      var cardTop = card.getBoundingClientRect().top + window.scrollY;
-      var cardBottom = cardTop + card.offsetHeight;
-
-      if (scrollPosition >= cardTop && scrollPosition < cardBottom) {
+      var cardRect = card.getBoundingClientRect();
+      var cardTop = card.offsetTop;
+      
+      // Check if card is visible in the viewport
+      if (cardRect.top < window.innerHeight / 2 && cardRect.bottom > 0) {
         activeCard = card;
         activeColor = card.getAttribute('data-color') || '#f0f0f0';
       }
     });
 
-    // Update background color
+    // Update background color with smooth transition
     if (activeColor) {
       servicesWrapper.style.backgroundColor = activeColor;
     }
@@ -934,24 +937,33 @@ resetAutoSlide();
       }
     });
 
-    // Scale effect for cards as they scroll out
+    // Stacking effect: scale, translate, and fade cards as they become sticky
     cards.forEach(function(card, i) {
       var cardRect = card.getBoundingClientRect();
-      var stickyTop = 60;
+      var cardBody = card.querySelector('.card-body');
+      
+      if (!cardBody) return;
+
+      var stickyTop = 60; // Position where card becomes sticky
       var progress = 0;
 
+      // Calculate how far past the sticky point the card is
       if (cardRect.top <= stickyTop) {
-        var diff = stickyTop - cardRect.top;
-        progress = Math.min(1, diff / 400);
+        var scrollDistance = stickyTop - cardRect.top;
+        // Stronger effect over shorter distance for more dramatic stacking
+        progress = Math.min(1, scrollDistance / 300);
       }
 
-      var cardBody = card.querySelector('.card-body');
-      if (cardBody) {
-        var scale = 1 - (progress * 0.08);
-        var opacity = 1 - (progress * 0.15);
-        cardBody.style.transform = 'scale(' + scale + ')';
-        cardBody.style.opacity = opacity;
-      }
+      // Aggressive stacking effect
+      var scale = 1 - (progress * 0.15);
+      var translateY = progress * -25;
+      var opacity = 1 - (progress * 0.3);
+      var blur = progress * 3;
+      
+      // Apply all transforms
+      cardBody.style.transform = 'scale(' + scale + ') translateY(' + translateY + 'px)';
+      cardBody.style.opacity = opacity;
+      cardBody.style.filter = 'blur(' + blur + 'px)';
     });
   });
 
