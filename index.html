@@ -64,11 +64,11 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
 /* SERVICES - Enhanced stacking cards scroll-down animations with colors and sidebar */
-.root {
+:root {
   --cards: 6;
-  --cardHeight: 87vh;
-  --cardTopPadding: 1.5em;
-  --cardMargin: 4vw;
+  --cardHeight: 520px; /* slightly taller */
+  --cardTopPadding: 1em; /* tighter stack for overlapping */
+  --cardMargin: 3vw;
 }
 .container {
   width:90%;
@@ -77,12 +77,16 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 #cards {
   list-style:none;
   padding-left: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(var(--cards), var(--cardHeight));
+  display: flex;
+  flex-direction: column;
   gap: var(--cardMargin);
-  padding-bottom: calc(var(--cards) * var(--cardTopPadding));
+  padding-bottom: calc(var(--cards) * var(--cardTopPadding) + 100px);
   margin-bottom: var(--cardMargin);
+}
+.card {
+  position: sticky;
+  top: 50px; /* stick a bit lower from the top */
+  padding-top: calc(var(--index1) * var(--cardTopPadding));
 }
 #card1 {
   --index1: 1;
@@ -110,28 +114,33 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 }
 #card3 .card-body {
   background-color: #f5f5f5;
+  color: #1a1a3e;
 }
 #card4 .card-body {
   background-color: #185FA5;
 }
 #card5 .card-body {
-  background-color:blue;
+  background-color: #4f5ec0;
 }
 #card6 .card-body {
   background-color: #12122e;
 }
 .card-body {
   box-sizing: border-box;
-  padding: 30px;
-  border-radius: 50px;
-  box-shadow: 0 0 30px 0 rgba(0,0,0,0.3);
+  padding: 40px; /* more padding */
+  border-radius: 24px; /* cleaner radius */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   height: var(--cardHeight);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #fff; /* default text color */
+  transition: transform 0.3s ease;
 }
-h2 {
-  font-size: 2.5em;
+.card-body h2 {
+  font-size: 2.2em;
+  margin-bottom: 20px;
 }
 
 /* NEWS */
@@ -382,32 +391,44 @@ h2 {
     <ul id="cards">
       <li class="card" id="card1">
         <div class="card-body">
-          <h2>Card 1</h2>
+          <div class="annot green">Digital Transformation</div>
+          <h2>IT Strategy & Consulting</h2>
+          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">We help organizations navigate the complex digital landscape with tailored IT strategies that drive growth and efficiency.</p>
         </div>
       </li>
       <li class="card" id="card2">
         <div class="card-body">
-          <h2>Card 2</h2>
+          <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Infrastructure</div>
+          <h2>Network Integration</h2>
+          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">Robust, scalable, and secure network solutions designed to keep your business connected 24/7 without interruptions.</p>
         </div>
       </li>
       <li class="card" id="card3">
         <div class="card-body">
-          <h2>Card 3</h2>
+          <div class="annot green">Security</div>
+          <h2>Cyber Security</h2>
+          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.7;">Multi-layered defense systems to protect your critical data and infrastructure from evolving global cyber threats.</p>
         </div>
       </li>
       <li class="card" id="card4">
         <div class="card-body">
-          <h2>Card 4</h2>
+          <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Cloud</div>
+          <h2>Cloud Solutions</h2>
+          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">Seamless migration and management of cloud environments to enhance collaboration and reduce operational costs.</p>
         </div>
       </li>
       <li class="card" id="card5">
         <div class="card-body">
-          <h2>Card 5</h2>
+          <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Hardware</div>
+          <h2>AV & Unified Comms</h2>
+          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">State-of-the-art audio-visual setups and unified communication platforms for modern meeting rooms and remote teams.</p>
         </div>
       </li>
       <li class="card" id="card6">
         <div class="card-body">
-          <h2>Card 6</h2>
+          <div class="annot green">Software</div>
+          <h2>ERP & CRM Systems</h2>
+          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">Comprehensive Odoo ERP and CRM implementations to streamline your business processes and customer relationships.</p>
         </div>
       </li>
     </ul>
@@ -639,49 +660,45 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// Services stacking cards — scale down when pinned
+// Services stacking cards — scale down effect
 (function() {
-  var stack = document.getElementById('servicesStack');
-  var cards = document.querySelectorAll('.srv-card-content');
+  var stack = document.getElementById('cards');
+  var cards = document.querySelectorAll('.card');
   var numCards = cards.length;
-  stack.style.setProperty('--numcards', numCards);
 
-  if ('ViewTimeline' in window) {
-    var viewTimeline = new ViewTimeline({ subject: stack, axis: 'block' });
+  if (!stack || cards.length === 0) return;
+
+  window.addEventListener('scroll', function() {
+    var stackRect = stack.getBoundingClientRect();
+    var viewH = window.innerHeight || document.documentElement.clientHeight;
+    
     cards.forEach(function(card, i) {
-      var reverseIndex0 = numCards - i - 1;
-      card.animate(
-        { transform: ['scale(1)', 'scale(' + (1 - 0.05 * reverseIndex0) + ')'] },
-        {
-          timeline: viewTimeline,
-          fill: 'forwards',
-          rangeStart: 'exit-crossing ' + (i / numCards * 100) + '%',
-          rangeEnd: 'exit-crossing ' + ((i + 1) / numCards * 100) + '%',
-        }
-      );
+      var cardRect = card.getBoundingClientRect();
+      var cardBody = card.querySelector('.card-body');
+      
+      // Calculate how much the card has "stuck"
+      // stickyTop matches the CSS: top: 50px + (index * 1em)
+      // 1em is roughly 16px
+      var stickyTop = 50 + (i * 16); 
+      var progress = 0;
+      
+      if (cardRect.top <= stickyTop + 1) { // +1 for subpixel rounding
+        var diff = stickyTop - cardRect.top;
+        progress = Math.min(1, diff / 600); 
+      }
+      
+      // More pronounced scaling and opacity for the overlapping effect
+      var scale = 1 - (progress * 0.1); // Increased from 0.05
+      var opacity = 1 - (progress * 0.2); // Increased from 0.1
+      var brightness = 1 - (progress * 0.3);
+      
+      if (cardBody) {
+        cardBody.style.transform = 'scale(' + scale + ') translateY(' + (progress * -20) + 'px)';
+        cardBody.style.opacity = opacity;
+        cardBody.style.filter = 'brightness(' + brightness + ')';
+      }
     });
-  } else {
-    window.addEventListener('scroll', function() {
-      var stackRect = stack.getBoundingClientRect();
-      var stackHeight = stack.offsetHeight;
-      var viewH = window.innerHeight || document.documentElement.clientHeight;
-      var scrolled = viewH - stackRect.top;
-      var progress = Math.max(0, Math.min(1, scrolled / (stackHeight + viewH)));
-      cards.forEach(function(card, i) {
-        var reverseIndex0 = numCards - i - 1;
-        var cardStart = i / numCards;
-        var cardEnd = (i + 1) / numCards;
-        var cardProgress = Math.max(0, Math.min(1, (progress - cardStart) / (cardEnd - cardStart)));
-        var scale = 1 - 0.05 * reverseIndex0 * cardProgress;
-        card.style.transform = 'scale(' + scale + ')';
-        if (cardProgress > 0.1) {
-          card.style.boxShadow = '0 8px 28px rgba(0,0,0,0.3)';
-        } else {
-          card.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)';
-        }
-      });
-    });
-  }
+  });
 })();
 
 // Back to top visibility
