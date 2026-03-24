@@ -7,7 +7,12 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-.page { background: #f0f0f0; font-family: inherit; border-radius: 12px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.1); max-width: 960px; margin: 0 auto; }
+
+/* ✅ FIX #1: Changed overflow:hidden → overflow:clip
+   overflow:hidden creates a scroll container which breaks position:sticky on all descendants.
+   overflow:clip preserves the visual border-radius clipping without trapping sticky elements. */
+.page { background: #f0f0f0; font-family: inherit; border-radius: 12px; overflow: clip; border: 0.5px solid rgba(0,0,0,0.1); max-width: 960px; margin: 0 auto; }
+
 .annot { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 4px; background: rgba(128,0,32,0.12); color: #a0304a; margin-bottom: 8px; letter-spacing: 0.4px; }
 .annot.green { background: rgba(29,158,117,0.15); color: #1a8a60; }
 .section-label { font-size: 9px; color: rgba(0,0,0,0.3); letter-spacing: 1px; text-transform: uppercase; border-left: 2px solid rgba(128,0,32,0.4); padding-left: 6px; margin-bottom: 10px; }
@@ -63,7 +68,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
-/* SERVICES - Premium split layout with sidebar navigation and dynamic background */
+/* SERVICES */
 :root {
   --cards: 6;
   --cardHeight: 520px;
@@ -72,10 +77,13 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 
 .services-wrapper {
   width: 100%;
-  background: #f0f0f0;
+  background: #1a1a3e;
   transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 60px 24px;
+  padding: 40px 28px;
   position: relative;
+  border-radius: 14px;
+  border: 0.5px solid rgba(26,26,62,0.3);
+  overflow: clip;
 }
 
 .services-content {
@@ -110,7 +118,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   background: transparent;
   transition: all 0.3s ease;
   flex-shrink: 0;
@@ -127,7 +135,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .nav-label {
   font-size: 11px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   letter-spacing: 0.5px;
   text-transform: uppercase;
   opacity: 0;
@@ -154,15 +162,14 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   position: sticky;
   top: 60px;
   padding-top: 0;
-  z-index: 10;
 }
 
-#card1 { --index1: 1; z-index: 60; }
-#card2 { --index1: 2; z-index: 50; }
-#card3 { --index1: 3; z-index: 40; }
-#card4 { --index1: 4; z-index: 30; }
-#card5 { --index1: 5; z-index: 20; }
-#card6 { --index1: 6; z-index: 10; }
+#card1 { z-index: 10; }
+#card2 { z-index: 20; }
+#card3 { z-index: 30; }
+#card4 { z-index: 40; }
+#card5 { z-index: 50; }
+#card6 { z-index: 60; }
 
 #card1 .card-body { background-color: #12122e; }
 #card2 .card-body { background-color: #5c0018; }
@@ -183,12 +190,14 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   gap: 40px;
   align-items: center;
   color: #fff;
-  transition: transform 0.1s ease, opacity 0.1s ease, filter 0.1s ease;
+  /* ✅ Smooth transitions for stacking effect transforms */
+  transition: transform 0.15s ease, opacity 0.15s ease, filter 0.15s ease;
   overflow: hidden;
-  transform-origin: center center;
+  transform-origin: top center;
+  will-change: transform, opacity, filter;
 }
 
-/* Card Left Side - Text Content */
+/* Card Left Side */
 .card-left {
   display: flex;
   flex-direction: column;
@@ -237,7 +246,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   max-width: 100%;
 }
 
-/* Card Right Side - Image/Mockup */
+/* Card Right Side */
 .card-right {
   display: flex;
   align-items: center;
@@ -363,7 +372,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
     <div class="hero-slider">
       <div class="hero-track" id="heroTrack">
 
-        <!-- Slide 1: We are Inventions -->
+        <!-- Slide 1 -->
         <div class="hero-slide">
           <div class="hero-left">
             <div class="eyebrow-pill">We are Inventions</div>
@@ -388,7 +397,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
           </div>
         </div>
 
-        <!-- Slide 2: Video Conferencing -->
+        <!-- Slide 2 -->
         <div class="hero-slide">
           <div class="hero-left">
             <div class="eyebrow-pill">Next-Gen Collaboration</div>
@@ -413,7 +422,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
           </div>
         </div>
 
-        <!-- Slide 3: Network Security -->
+        <!-- Slide 3 -->
         <div class="hero-slide">
           <div class="hero-left">
             <div class="eyebrow-pill">Protect Your Business</div>
@@ -435,7 +444,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
           </div>
         </div>
 
-        <!-- Slide 4: Call Center Solution -->
+        <!-- Slide 4 -->
         <div class="hero-slide">
           <div class="hero-left">
             <div class="eyebrow-pill">Communication Hub</div>
@@ -511,7 +520,15 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   </div>
 
   <!-- SERVICES -->
+  <div style="padding: 24px 24px 0;"><div style="padding: 0 0 6px;"><span class="section-label">Services section</span></div></div>
+  <div style="padding: 0 24px 24px;">
   <div class="services-wrapper" id="servicesWrapper">
+    <div style="text-align:center; margin-bottom:32px;">
+      <div class="p-eyebrow">What we do</div>
+      <div class="p-title" style="font-size:18px;">Our Services</div>
+      <div class="p-sub">Comprehensive IT solutions tailored for your business</div>
+      <div class="p-divider"></div>
+    </div>
     <div class="services-content">
       <!-- SIDEBAR NAVIGATION -->
       <nav class="side-nav" id="sideNav">
@@ -533,11 +550,11 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
         </div>
         <div class="nav-indicator" data-card="card5">
           <div class="nav-circle"></div>
-          <span class="nav-label">AV & Comms</span>
+          <span class="nav-label">AV &amp; Comms</span>
         </div>
         <div class="nav-indicator" data-card="card6">
           <div class="nav-circle"></div>
-          <span class="nav-label">ERP & CRM</span>
+          <span class="nav-label">ERP &amp; CRM</span>
         </div>
       </nav>
 
@@ -548,7 +565,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             <div class="card-left">
               <div>
                 <div class="annot green">Digital Transformation</div>
-                <h2>IT Strategy & Consulting</h2>
+                <h2>IT Strategy &amp; Consulting</h2>
                 <div class="card-tags">
                   <span class="card-tag">Strategy</span>
                   <span class="card-tag">Consulting</span>
@@ -557,7 +574,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
               <p>We help organizations navigate the complex digital landscape with tailored IT strategies that drive growth and efficiency.</p>
             </div>
             <div class="card-right">
-              <div class="card-mockup">Strategy & Consulting Mockup</div>
+              <div class="card-mockup">Strategy &amp; Consulting Mockup</div>
             </div>
           </div>
         </li>
@@ -580,7 +597,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             </div>
           </div>
         </li>
-        <li class="card" id="card3" data-color="#f5f5f5">
+        <li class="card" id="card3" data-color="#e8e8e8">
           <div class="card-body">
             <div class="card-left">
               <div>
@@ -623,7 +640,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             <div class="card-left">
               <div>
                 <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Hardware</div>
-                <h2>AV & Unified Comms</h2>
+                <h2>AV &amp; Unified Comms</h2>
                 <div class="card-tags">
                   <span class="card-tag">Audio-Visual</span>
                   <span class="card-tag">Unified Comms</span>
@@ -637,12 +654,12 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             </div>
           </div>
         </li>
-        <li class="card" id="card6" data-color="#12122e">
+        <li class="card" id="card6" data-color="#4E4E6E">
           <div class="card-body">
             <div class="card-left">
               <div>
                 <div class="annot green">Software</div>
-                <h2>ERP & CRM Systems</h2>
+                <h2>ERP &amp; CRM Systems</h2>
                 <div class="card-tags">
                   <span class="card-tag">Odoo ERP</span>
                   <span class="card-tag">CRM</span>
@@ -659,7 +676,8 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
       </ul>
     </div>
   </div>
-  <!---SERVICE ENDS here -->
+
+  </div><!-- end services outer -->
 
   <!-- NEWS -->
   <div class="section-pad">
@@ -853,10 +871,10 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 </button>
 
 <script>
-// Hero Slider
-let currentSlide = 0;
-const totalSlides = 4;
-let autoSlideTimer;
+// ─── Hero Slider ────────────────────────────────────────────────────────────
+var currentSlide = 0;
+var totalSlides = 4;
+var autoSlideTimer;
 
 function updateSlider() {
   var track = document.getElementById('heroTrack');
@@ -886,16 +904,15 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// Services: Sidebar sync, background color transitions, and stacking effect
+// ─── Services: Sticky stacking cards, sidebar sync, background transition ───
 (function() {
   var servicesWrapper = document.getElementById('servicesWrapper');
-  var cards = document.querySelectorAll('.card');
-  var sideNav = document.getElementById('sideNav');
-  var navIndicators = document.querySelectorAll('.nav-indicator');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var navIndicators = Array.prototype.slice.call(document.querySelectorAll('.nav-indicator'));
 
   if (!servicesWrapper || cards.length === 0) return;
 
-  // Handle sidebar click navigation
+  // Sidebar click → scroll to card
   navIndicators.forEach(function(indicator) {
     indicator.addEventListener('click', function() {
       var cardId = this.getAttribute('data-card');
@@ -906,104 +923,70 @@ resetAutoSlide();
     });
   });
 
-  // Scroll listener for sidebar sync, background color transitions, and stacking effect
-  window.addEventListener('scroll', function() {
-    var scrollPos = window.pageYOffset;
+  function onScroll() {
     var activeCard = null;
     var activeColor = '#f0f0f0';
 
-    // Find which card should be active based on viewport position
-    cards.forEach(function(card, index) {
-      var cardRect = card.getBoundingClientRect();
-      var cardTop = card.offsetTop;
-      
-      // Check if card is visible in the viewport
-      if (cardRect.top < window.innerHeight / 2 && cardRect.bottom > 0) {
+    // ✅ FIX #2: Track which card is active (visible near top of viewport)
+    // and only compress cards that have been PASSED (next card is entering view)
+    cards.forEach(function(card) {
+      var rect = card.getBoundingClientRect();
+      // Card is considered "active" if its top half is in the upper viewport
+      if (rect.top < window.innerHeight * 0.55 && rect.bottom > 0) {
         activeCard = card;
         activeColor = card.getAttribute('data-color') || '#f0f0f0';
       }
     });
 
-    // Update background color with smooth transition
-    if (activeColor) {
-      servicesWrapper.style.backgroundColor = activeColor;
-    }
+    // Smoothly transition background colour of the services section
+    servicesWrapper.style.backgroundColor = activeColor;
 
-    // Update sidebar indicators
+    // Update sidebar dot indicators
     navIndicators.forEach(function(indicator) {
-      indicator.classList.remove('active');
-      if (activeCard && indicator.getAttribute('data-card') === activeCard.id) {
-        indicator.classList.add('active');
-      }
+      var isActive = activeCard && indicator.getAttribute('data-card') === activeCard.id;
+      indicator.classList.toggle('active', !!isActive);
     });
 
-    // Stacking effect: scale, translate, and fade cards as they become sticky
+    // ✅ FIX #2 (continued): Apply stacking compression only when the NEXT card
+    // starts pushing the current one — the active card stays full size.
     cards.forEach(function(card, i) {
-      var cardRect = card.getBoundingClientRect();
       var cardBody = card.querySelector('.card-body');
-      
       if (!cardBody) return;
 
-      var stickyTop = 60; // Position where card becomes sticky
+      var nextCard = cards[i + 1];
       var progress = 0;
 
-      // Calculate how far past the sticky point the card is
-      if (cardRect.top <= stickyTop) {
-        var scrollDistance = stickyTop - cardRect.top;
-        // Stronger effect over shorter distance for more dramatic stacking
-        progress = Math.min(1, scrollDistance / 300);
+      if (nextCard) {
+        var nextRect = nextCard.getBoundingClientRect();
+        // Start compressing once the next card is within 80% of viewport height
+        var triggerPoint = window.innerHeight * 0.8;
+        if (nextRect.top < triggerPoint) {
+          progress = Math.min(1, (triggerPoint - nextRect.top) / 400);
+        }
       }
 
-      // Aggressive stacking effect
-      var scale = 1 - (progress * 0.15);
-      var translateY = progress * -25;
-      var opacity = 1 - (progress * 0.3);
-      var blur = progress * 3;
-      
-      // Apply all transforms
-      cardBody.style.transform = 'scale(' + scale + ') translateY(' + translateY + 'px)';
-      cardBody.style.opacity = opacity;
-      cardBody.style.filter = 'blur(' + blur + 'px)';
-    });
-  });
+      // Subtle but visible stacking compression
+      var scale      = 1 - (progress * 0.06);
+      var translateY = progress * -12;
+      var opacity    = 1 - (progress * 0.2);
+      var blur       = progress * 1.5;
 
-  // Trigger initial state
-  window.dispatchEvent(new Event('scroll'));
+      cardBody.style.transform = 'scale(' + scale + ') translateY(' + translateY + 'px)';
+      cardBody.style.opacity   = String(opacity);
+      cardBody.style.filter    = blur > 0.05 ? 'blur(' + blur + 'px)' : 'none';
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  // Run once on load to set initial state
+  onScroll();
 })();
 
-// Back to top visibility
+// ─── Back to Top ─────────────────────────────────────────────────────────────
 var backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', function() {
-  if (window.scrollY > 300) {
-    backToTopBtn.classList.add('visible');
-  } else {
-    backToTopBtn.classList.remove('visible');
-  }
-});
-
-// Service cards scroll animation with Intersection Observer
-(function() {
-  var serviceCards = document.querySelectorAll('.srv-card');
-  if (serviceCards.length === 0) return;
-  
-  var observerOptions = {
-    root: null,
-    rootMargin: '-100px 0px -100px 0px',
-    threshold: 0
-  };
-  
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, observerOptions);
-  
-  serviceCards.forEach(function(card) {
-    observer.observe(card);
-  });
-})();
+  backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+}, { passive: true });
 </script>
 </body>
 </html>
