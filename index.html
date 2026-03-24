@@ -63,84 +63,206 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
-/* SERVICES - Enhanced stacking cards scroll-down animations with colors and sidebar */
+/* SERVICES - Premium split layout with sidebar navigation and dynamic background */
 :root {
   --cards: 6;
-  --cardHeight: 520px; /* slightly taller */
-  --cardTopPadding: 1em; /* tighter stack for overlapping */
+  --cardHeight: 520px;
   --cardMargin: 3vw;
 }
-.container {
-  width:90%;
-  margin:0 auto;
+
+.services-wrapper {
+  width: 100%;
+  background: #f0f0f0;
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 60px 24px;
+  position: relative;
 }
+
+.services-content {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* SIDEBAR NAVIGATION */
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+.nav-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: all 0.3s ease;
+}
+
+.nav-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-indicator.active .nav-circle {
+  width: 16px;
+  height: 16px;
+  border-color: #800020;
+  background: #800020;
+  box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.15);
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-indicator.active .nav-label {
+  color: #800020;
+  opacity: 1;
+}
+
+/* CARDS CONTAINER */
 #cards {
-  list-style:none;
+  list-style: none;
   padding-left: 0;
   display: flex;
   flex-direction: column;
   gap: var(--cardMargin);
-  padding-bottom: calc(var(--cards) * var(--cardTopPadding) + 100px);
-  margin-bottom: var(--cardMargin);
+  padding-bottom: 100px;
 }
+
 .card {
   position: sticky;
-  top: 50px; /* stick a bit lower from the top */
-  padding-top: calc(var(--index1) * var(--cardTopPadding));
+  top: 60px;
+  padding-top: 0;
 }
-#card1 {
-  --index1: 1;
-}
-#card2 {
-  --index1: 2;
-}
-#card3 {
-  --index1: 3;
-}
-#card4 {
-  --index1: 4;
-}
-#card5 {
-  --index1: 5;
-}
-#card6 {
-  --index1: 6;
-}
-#card1 .card-body {
-  background-color: #12122e;
-}
-#card2 .card-body {
-  background-color: #5c0018;
-}
-#card3 .card-body {
-  background-color: #f5f5f5;
-  color: #1a1a3e;
-}
-#card4 .card-body {
-  background-color: #185FA5;
-}
-#card5 .card-body {
-  background-color: #4f5ec0;
-}
-#card6 .card-body {
-  background-color: #12122e;
-}
+
+#card1 { --index1: 1; }
+#card2 { --index1: 2; }
+#card3 { --index1: 3; }
+#card4 { --index1: 4; }
+#card5 { --index1: 5; }
+#card6 { --index1: 6; }
+
+#card1 .card-body { background-color: #12122e; }
+#card2 .card-body { background-color: #5c0018; }
+#card3 .card-body { background-color: #f5f5f5; color: #1a1a3e; }
+#card4 .card-body { background-color: #185FA5; }
+#card5 .card-body { background-color: #4f5ec0; }
+#card6 .card-body { background-color: #12122e; }
+
+/* CARD SPLIT LAYOUT */
 .card-body {
   box-sizing: border-box;
-  padding: 40px; /* more padding */
-  border-radius: 24px; /* cleaner radius */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   height: var(--cardHeight);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  color: #fff;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+/* Card Left Side - Text Content */
+.card-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  color: #fff; /* default text color */
-  transition: transform 0.3s ease;
+  gap: 16px;
 }
+
 .card-body h2 {
   font-size: 2.2em;
-  margin-bottom: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+#card3 .card-tag {
+  background: rgba(26, 26, 62, 0.08);
+  border-color: rgba(26, 26, 62, 0.15);
+  color: rgba(26, 26, 62, 0.7);
+}
+
+.card-body p {
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Card Right Side - Image/Mockup */
+.card-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.card-mockup {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  text-align: center;
+  padding: 20px;
+}
+
+#card3 .card-mockup {
+  background: linear-gradient(135deg, rgba(26,26,62,0.05) 0%, rgba(26,26,62,0.02) 100%);
+  color: rgba(26, 26, 62, 0.2);
 }
 
 /* NEWS */
@@ -387,51 +509,153 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   </div>
 
   <!-- SERVICES -->
-  <div class="container">
-    <ul id="cards">
-      <li class="card" id="card1">
-        <div class="card-body">
-          <div class="annot green">Digital Transformation</div>
-          <h2>IT Strategy & Consulting</h2>
-          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">We help organizations navigate the complex digital landscape with tailored IT strategies that drive growth and efficiency.</p>
+  <div class="services-wrapper" id="servicesWrapper">
+    <div class="services-content">
+      <!-- SIDEBAR NAVIGATION -->
+      <nav class="side-nav" id="sideNav">
+        <div class="nav-indicator active" data-card="card1">
+          <div class="nav-circle"></div>
+          <span class="nav-label">IT Strategy</span>
         </div>
-      </li>
-      <li class="card" id="card2">
-        <div class="card-body">
-          <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Infrastructure</div>
-          <h2>Network Integration</h2>
-          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">Robust, scalable, and secure network solutions designed to keep your business connected 24/7 without interruptions.</p>
+        <div class="nav-indicator" data-card="card2">
+          <div class="nav-circle"></div>
+          <span class="nav-label">Network</span>
         </div>
-      </li>
-      <li class="card" id="card3">
-        <div class="card-body">
-          <div class="annot green">Security</div>
-          <h2>Cyber Security</h2>
-          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.7;">Multi-layered defense systems to protect your critical data and infrastructure from evolving global cyber threats.</p>
+        <div class="nav-indicator" data-card="card3">
+          <div class="nav-circle"></div>
+          <span class="nav-label">Security</span>
         </div>
-      </li>
-      <li class="card" id="card4">
-        <div class="card-body">
-          <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Cloud</div>
-          <h2>Cloud Solutions</h2>
-          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">Seamless migration and management of cloud environments to enhance collaboration and reduce operational costs.</p>
+        <div class="nav-indicator" data-card="card4">
+          <div class="nav-circle"></div>
+          <span class="nav-label">Cloud</span>
         </div>
-      </li>
-      <li class="card" id="card5">
-        <div class="card-body">
-          <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Hardware</div>
-          <h2>AV & Unified Comms</h2>
-          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">State-of-the-art audio-visual setups and unified communication platforms for modern meeting rooms and remote teams.</p>
+        <div class="nav-indicator" data-card="card5">
+          <div class="nav-circle"></div>
+          <span class="nav-label">AV & Comms</span>
         </div>
-      </li>
-      <li class="card" id="card6">
-        <div class="card-body">
-          <div class="annot green">Software</div>
-          <h2>ERP & CRM Systems</h2>
-          <p style="text-align:center; max-width: 600px; line-height: 1.6; opacity: 0.8;">Comprehensive Odoo ERP and CRM implementations to streamline your business processes and customer relationships.</p>
+        <div class="nav-indicator" data-card="card6">
+          <div class="nav-circle"></div>
+          <span class="nav-label">ERP & CRM</span>
         </div>
-      </li>
-    </ul>
+      </nav>
+
+      <!-- CARDS CONTAINER -->
+      <ul id="cards">
+        <li class="card" id="card1" data-color="#12122e">
+          <div class="card-body">
+            <div class="card-left">
+              <div>
+                <div class="annot green">Digital Transformation</div>
+                <h2>IT Strategy & Consulting</h2>
+                <div class="card-tags">
+                  <span class="card-tag">Strategy</span>
+                  <span class="card-tag">Consulting</span>
+                </div>
+              </div>
+              <p>We help organizations navigate the complex digital landscape with tailored IT strategies that drive growth and efficiency.</p>
+            </div>
+            <div class="card-right">
+              <div class="card-mockup">Strategy & Consulting Mockup</div>
+            </div>
+          </div>
+        </li>
+        <li class="card" id="card2" data-color="#5c0018">
+          <div class="card-body">
+            <div class="card-left">
+              <div>
+                <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Infrastructure</div>
+                <h2>Network Integration</h2>
+                <div class="card-tags">
+                  <span class="card-tag">Network</span>
+                  <span class="card-tag">Infrastructure</span>
+                  <span class="card-tag">24/7 Support</span>
+                </div>
+              </div>
+              <p>Robust, scalable, and secure network solutions designed to keep your business connected 24/7 without interruptions.</p>
+            </div>
+            <div class="card-right">
+              <div class="card-mockup">Network Integration Dashboard</div>
+            </div>
+          </div>
+        </li>
+        <li class="card" id="card3" data-color="#f5f5f5">
+          <div class="card-body">
+            <div class="card-left">
+              <div>
+                <div class="annot green">Security</div>
+                <h2>Cyber Security</h2>
+                <div class="card-tags">
+                  <span class="card-tag">Protection</span>
+                  <span class="card-tag">Defense</span>
+                  <span class="card-tag">Monitoring</span>
+                </div>
+              </div>
+              <p>Multi-layered defense systems to protect your critical data and infrastructure from evolving global cyber threats.</p>
+            </div>
+            <div class="card-right">
+              <div class="card-mockup">Security Dashboard</div>
+            </div>
+          </div>
+        </li>
+        <li class="card" id="card4" data-color="#185FA5">
+          <div class="card-body">
+            <div class="card-left">
+              <div>
+                <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Cloud</div>
+                <h2>Cloud Solutions</h2>
+                <div class="card-tags">
+                  <span class="card-tag">Migration</span>
+                  <span class="card-tag">Management</span>
+                  <span class="card-tag">Scalability</span>
+                </div>
+              </div>
+              <p>Seamless migration and management of cloud environments to enhance collaboration and reduce operational costs.</p>
+            </div>
+            <div class="card-right">
+              <div class="card-mockup">Cloud Management Platform</div>
+            </div>
+          </div>
+        </li>
+        <li class="card" id="card5" data-color="#4f5ec0">
+          <div class="card-body">
+            <div class="card-left">
+              <div>
+                <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Hardware</div>
+                <h2>AV & Unified Comms</h2>
+                <div class="card-tags">
+                  <span class="card-tag">Audio-Visual</span>
+                  <span class="card-tag">Unified Comms</span>
+                  <span class="card-tag">Meetings</span>
+                </div>
+              </div>
+              <p>State-of-the-art audio-visual setups and unified communication platforms for modern meeting rooms and remote teams.</p>
+            </div>
+            <div class="card-right">
+              <div class="card-mockup">AV Setup Configuration</div>
+            </div>
+          </div>
+        </li>
+        <li class="card" id="card6" data-color="#12122e">
+          <div class="card-body">
+            <div class="card-left">
+              <div>
+                <div class="annot green">Software</div>
+                <h2>ERP & CRM Systems</h2>
+                <div class="card-tags">
+                  <span class="card-tag">Odoo ERP</span>
+                  <span class="card-tag">CRM</span>
+                  <span class="card-tag">Business Process</span>
+                </div>
+              </div>
+              <p>Comprehensive Odoo ERP and CRM implementations to streamline your business processes and customer relationships.</p>
+            </div>
+            <div class="card-right">
+              <div class="card-mockup">Odoo ERP Interface</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
   <!---SERVICE ENDS here -->
 
@@ -660,45 +884,79 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// Services stacking cards — scale down effect
+// Services: Sidebar sync and background color transitions
 (function() {
-  var stack = document.getElementById('cards');
+  var servicesWrapper = document.getElementById('servicesWrapper');
   var cards = document.querySelectorAll('.card');
-  var numCards = cards.length;
+  var sideNav = document.getElementById('sideNav');
+  var navIndicators = document.querySelectorAll('.nav-indicator');
 
-  if (!stack || cards.length === 0) return;
+  if (!servicesWrapper || cards.length === 0) return;
 
-  window.addEventListener('scroll', function() {
-    var stackRect = stack.getBoundingClientRect();
-    var viewH = window.innerHeight || document.documentElement.clientHeight;
-    
-    cards.forEach(function(card, i) {
-      var cardRect = card.getBoundingClientRect();
-      var cardBody = card.querySelector('.card-body');
-      
-      // Calculate how much the card has "stuck"
-      // stickyTop matches the CSS: top: 50px + (index * 1em)
-      // 1em is roughly 16px
-      var stickyTop = 50 + (i * 16); 
-      var progress = 0;
-      
-      if (cardRect.top <= stickyTop + 1) { // +1 for subpixel rounding
-        var diff = stickyTop - cardRect.top;
-        progress = Math.min(1, diff / 600); 
-      }
-      
-      // More pronounced scaling and opacity for the overlapping effect
-      var scale = 1 - (progress * 0.1); // Increased from 0.05
-      var opacity = 1 - (progress * 0.2); // Increased from 0.1
-      var brightness = 1 - (progress * 0.3);
-      
-      if (cardBody) {
-        cardBody.style.transform = 'scale(' + scale + ') translateY(' + (progress * -20) + 'px)';
-        cardBody.style.opacity = opacity;
-        cardBody.style.filter = 'brightness(' + brightness + ')';
+  // Handle sidebar click navigation
+  navIndicators.forEach(function(indicator) {
+    indicator.addEventListener('click', function() {
+      var cardId = this.getAttribute('data-card');
+      var card = document.getElementById(cardId);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
   });
+
+  // Scroll listener for sidebar sync and background color transitions
+  window.addEventListener('scroll', function() {
+    var scrollPosition = window.scrollY + 200; // Offset for better detection
+    var activeCard = null;
+    var activeColor = '#f0f0f0';
+
+    // Find which card is currently in view
+    cards.forEach(function(card, index) {
+      var cardTop = card.getBoundingClientRect().top + window.scrollY;
+      var cardBottom = cardTop + card.offsetHeight;
+
+      if (scrollPosition >= cardTop && scrollPosition < cardBottom) {
+        activeCard = card;
+        activeColor = card.getAttribute('data-color') || '#f0f0f0';
+      }
+    });
+
+    // Update background color
+    if (activeColor) {
+      servicesWrapper.style.backgroundColor = activeColor;
+    }
+
+    // Update sidebar indicators
+    navIndicators.forEach(function(indicator) {
+      indicator.classList.remove('active');
+      if (activeCard && indicator.getAttribute('data-card') === activeCard.id) {
+        indicator.classList.add('active');
+      }
+    });
+
+    // Scale effect for cards as they scroll out
+    cards.forEach(function(card, i) {
+      var cardRect = card.getBoundingClientRect();
+      var stickyTop = 60;
+      var progress = 0;
+
+      if (cardRect.top <= stickyTop) {
+        var diff = stickyTop - cardRect.top;
+        progress = Math.min(1, diff / 400);
+      }
+
+      var cardBody = card.querySelector('.card-body');
+      if (cardBody) {
+        var scale = 1 - (progress * 0.08);
+        var opacity = 1 - (progress * 0.15);
+        cardBody.style.transform = 'scale(' + scale + ')';
+        cardBody.style.opacity = opacity;
+      }
+    });
+  });
+
+  // Trigger initial state
+  window.dispatchEvent(new Event('scroll'));
 })();
 
 // Back to top visibility
