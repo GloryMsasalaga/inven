@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Inventions Technologies — Full Page Wireframe</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: whitesmoke; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.page { background: whitesmoke; font-family: inherit; border-radius: 12px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.12); max-width: 960px; margin: 0 auto; }
+.annot { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 4px; background: rgba(192,57,43,0.18); color: #8b1a1a; margin-bottom: 8px; letter-spacing: 0.4px; }
+.annot.green { background: rgba(29,158,117,0.15); color: #1d6b53; }
+.section-label { font-size: 9px; color: rgba(0,0,0,0.35); letter-spacing: 1px; text-transform: uppercase; border-left: 2px solid rgba(128,0,32,0.45); padding-left: 6px; margin-bottom: 10px; }
+
+/* NAV */
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; border-bottom: 0.5px solid rgba(0,0,0,0.1); background: whitesmoke; }
+.nav-logo { display: flex; align-items: center; gap: 8px; }
+.logo-box { width: 30px; height: 30px; background: #800020; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.logo-text { font-size: 11px; font-weight: 500; color: #111; letter-spacing: 0.3px; line-height: 1.3; }
+.nav-links { display: flex; gap: 22px; }
+.nav-links a { font-size: 12px; color: rgba(0,0,0,0.6); text-decoration: none; }
+.nav-links a.active { color: #111; border-bottom: 1.5px solid #800020; padding-bottom: 2px; }
+.nav-cta { background: #800020; color: #fff; font-size: 12px; font-weight: 500; padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer; }
+
+/* HERO */
+.hero { display: flex; align-items: center; padding: 52px 28px 48px; gap: 32px; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+.hero-left { flex: 1; overflow: hidden; }
+.hero-track { display: flex; transition: transform 0.7s ease; }
+.hero-slide { min-width: 100%; }
+.eyebrow-pill { display: inline-block; font-size: 11px; color: rgba(0,0,0,0.6); border: 0.5px solid rgba(0,0,0,0.2); border-radius: 20px; padding: 4px 14px; margin-bottom: 16px; }
+.hero-h1 { font-size: 30px; font-weight: 500; color: #111; line-height: 1.2; margin-bottom: 10px; }
+.hero-sub { font-size: 14px; font-weight: 500; color: #800020; margin-bottom: 12px; }
+.hero-h1 span { color: #800020; }
+.hero-body { font-size: 12px; color: rgba(0,0,0,0.7); line-height: 1.8; margin-bottom: 24px; max-width: 420px; }
+.hero-btns { display: flex; gap: 10px; }
+.btn-primary { background: #800020; color: #fff; font-size: 12px; font-weight: 500; padding: 10px 22px; border-radius: 7px; border: none; cursor: pointer; }
+.btn-outline { background: #800020; color: #fff; font-size: 12px; padding: 10px 22px; border-radius: 7px; border: 0.5px solid #800020; cursor: pointer; }
+.hero-right { width: 180px; height: 180px; border-radius: 50%; background: rgba(0,31,63,0.08); border: 0.5px solid rgba(0,31,63,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hero-controls { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.hero-control-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid #800020; background: #800020; color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.hero-dots { display: flex; gap: 6px; margin-left: 6px; }
+.hero-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(0,0,0,0.2); }
+.hero-dot.active { width: 18px; border-radius: 4px; background: #800020; }
+
+/* PARTNERS */
+.partners-card { background: #001f3f; border: 0.5px solid rgba(255,255,255,0.2); border-radius: 14px; padding: 24px 28px; }
+.partners-top { text-align: center; margin-bottom: 20px; }
+.p-eyebrow { font-size: 10px; color: #f0c4cf; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px; }
+.p-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+.p-sub { font-size: 11px; color: rgba(255,255,255,0.75); }
+.p-divider { width: 30px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
+.logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.logo-pill { background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.2); border-radius: 7px; padding: 9px 16px; font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 500; }
+.logo-pill.hi { color: #fff; border-color: rgba(255,255,255,0.35); }
+
+/* SECTIONS COMMON */
+.sec-heading { text-align: center; margin-bottom: 24px; }
+.sec-heading h2 { font-size: 20px; font-weight: 500; color: #111; margin-bottom: 6px; }
+.sec-heading p { font-size: 12px; color: rgba(0,0,0,0.6); }
+.sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
+
+/* SERVICES */
+.services-stack { display: flex; flex-direction: column; gap: 14px; max-height: 360px; overflow-y: auto; scroll-behavior: smooth; scroll-snap-type: y mandatory; padding-right: 6px; }
+.services-stack .srv-card { scroll-snap-align: start; position: sticky; border-radius: 12px; overflow: hidden; background: #001f3f; border: 0.5px solid rgba(255,255,255,0.22); }
+.services-stack .srv-card:nth-child(1) { top: 0; }
+.services-stack .srv-card:nth-child(2) { top: 16px; }
+.services-stack .srv-card:nth-child(3) { top: 32px; }
+.srv-img { height: 90px; background: #0a3158; display: flex; align-items: center; justify-content: center; }
+.srv-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.srv-body { padding: 14px; }
+.srv-tag { font-size: 9px; color: #f0c4cf; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+.srv-title { font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+.srv-desc { font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 12px; }
+.srv-link { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #f0c4cf; font-weight: 500; }
+.srv-link-arrow { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #f0c4cf; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #f0c4cf; }
+
+/* NEWS */
+.news-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.news-card { background: #001f3f; border: 0.5px solid rgba(255,255,255,0.22); border-radius: 12px; overflow: hidden; }
+.news-img { height: 80px; background: #0a3158; display: flex; align-items: center; justify-content: center; }
+.news-img-inner { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.3); }
+.news-body { padding: 12px; }
+.news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.news-tag { font-size: 9px; font-weight: 500; padding: 2px 7px; border-radius: 4px; }
+.news-tag.tech { background: rgba(255,255,255,0.14); color: #d6e7ff; }
+.news-tag.insight { background: rgba(255,255,255,0.14); color: #f5d5dd; }
+.news-date { font-size: 10px; color: rgba(255,255,255,0.7); }
+.news-title { font-size: 12px; font-weight: 500; color: #fff; margin-bottom: 6px; line-height: 1.4; }
+.news-excerpt { font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 10px; }
+.news-read { font-size: 11px; color: #f5d5dd; font-weight: 500; }
+
+/* TESTIMONIALS */
+.testi-bg { background: #001f3f; border: 0.5px solid rgba(255,255,255,0.22); border-radius: 14px; padding: 28px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.testi-card { background: #001f3f; border: 0.5px solid rgba(255,255,255,0.22); border-radius: 10px; padding: 16px; }
+.testi-stars { display: flex; gap: 3px; margin-bottom: 10px; }
+.star { width: 12px; height: 12px; background: #EF9F27; border-radius: 2px; }
+.testi-quote { font-size: 11px; color: rgba(255,255,255,0.84); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+.testi-divider { height: 0.5px; background: rgba(255,255,255,0.2); margin-bottom: 10px; }
+.testi-person { display: flex; align-items: center; gap: 8px; }
+.testi-avatar { width: 28px; height: 28px; border-radius: 50%; background: #800020; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 500; flex-shrink: 0; }
+.testi-name { font-size: 11px; font-weight: 500; color: #fff; }
+.testi-role { font-size: 10px; color: rgba(255,255,255,0.75); }
+
+/* CLIENTS */
+.tabs { display: flex; border-bottom: 0.5px solid rgba(0,0,0,0.15); margin-bottom: 20px; }
+.tab { font-size: 12px; padding: 9px 18px; color: rgba(0,0,0,0.6); cursor: pointer; border-bottom: 2px solid transparent; }
+.tab.active { color: #111; border-bottom-color: #800020; }
+.clients-row { display: flex; gap: 10px; align-items: center; }
+.scroll-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid #800020; background: #800020; color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+.clients-logos { display: flex; gap: 10px; flex: 1; overflow: hidden; }
+.client-logo-card { background: #001f3f; border: 0.5px solid rgba(255,255,255,0.22); border-radius: 10px; padding: 12px 18px; min-width: 90px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.client-logo-text { font-size: 11px; font-weight: 700; color: #fff; }
+.clients-dots { display: flex; gap: 5px; justify-content: center; margin-top: 16px; }
+.dot-ind { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.2); }
+.dot-ind.active { background: #800020; width: 18px; border-radius: 3px; }
+
+/* FOOTER */
+.footer { background: #001f3f; border-top: 0.5px solid rgba(255,255,255,0.18); padding: 36px 28px 20px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1.2fr 1fr 1fr 1.2fr; gap: 20px; margin-bottom: 28px; }
+.footer-col-title { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.95); margin-bottom: 12px; }
+.footer-link { font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 7px; }
+.footer-contact { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.82); margin-bottom: 7px; }
+.footer-icon { width: 14px; height: 14px; background: rgba(128,0,32,0.5); border-radius: 3px; flex-shrink: 0; }
+.social-row { display: flex; gap: 8px; margin-top: 4px; }
+.social-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.24); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(255,255,255,0.8); }
+.newsletter-row { display: flex; gap: 6px; }
+.newsletter-input { flex: 1; background: rgba(255,255,255,0.09); border: 0.5px solid rgba(255,255,255,0.24); border-radius: 6px; padding: 8px 10px; font-size: 11px; color: rgba(255,255,255,0.9); }
+.newsletter-btn { background: #800020; color: #fff; font-size: 11px; font-weight: 500; padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; white-space: nowrap; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 0.5px solid rgba(255,255,255,0.2); padding-top: 16px; }
+.footer-bottom span { font-size: 11px; color: rgba(255,255,255,0.78); }
+.section-pad { padding: 28px 24px 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- NAV -->
+  <div style="padding: 0 24px 0; background:whitesmoke;">
+    <div style="padding: 8px 0 4px;"><span class="section-label">Navigation</span></div>
+    <div class="nav" style="padding: 12px 0;">
+      <div class="nav-logo">
+        <div class="logo-box">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L8 3L13 8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3V14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="logo-text">INVENTIONS<br>TECHNOLOGIES</div>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Blogs</a>
+        <a href="#">Career</a>
+      </div>
+      <button class="nav-cta">Contact Us</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="padding: 0 24px;">
+    <div style="padding: 8px 0 4px;">
+      <span class="section-label">Hero section</span>
+      <span class="annot green" style="margin-left:8px;">Updated — sliding pages</span>
+    </div>
+    <div class="hero" style="padding: 40px 0 40px;">
+      <div class="hero-left">
+        <div class="hero-track" id="heroTrack">
+          <div class="hero-slide">
+            <div class="eyebrow-pill">Slide 1</div>
+            <div class="hero-h1">We are Inventions</div>
+            <div class="hero-sub">The Technology Solutions Provider</div>
+            <p class="hero-body">Founded in 2010, Inventions Technologies specialises in delivering top-notch IT solutions. We help clients succeed through IT transformation and exceptional customer experiences.</p>
+          </div>
+          <div class="hero-slide">
+            <div class="eyebrow-pill">Slide 2</div>
+            <div class="hero-h1">Revolutionize Collaboration</div>
+            <div class="hero-sub">Using Next Video Conferencing</div>
+            <p class="hero-body">Transform meetings with reliable conferencing, smart room systems, and integrated communication tools built for modern teamwork.</p>
+          </div>
+          <div class="hero-slide">
+            <div class="eyebrow-pill">Slide 3</div>
+            <div class="hero-h1">Secure Your Network</div>
+            <div class="hero-sub">Advanced Security Solution</div>
+            <p class="hero-body">Protect your digital environment with layered defense, proactive threat detection, and secure infrastructure management.</p>
+          </div>
+          <div class="hero-slide">
+            <div class="eyebrow-pill">Slide 4</div>
+            <div class="hero-h1">Call Center Solution</div>
+            <div class="hero-sub">Connected Customer Support</div>
+            <p class="hero-body">Unify calls, agents, and analytics to deliver faster responses, better service quality, and seamless customer engagement.</p>
+          </div>
+        </div>
+        <div class="hero-btns">
+          <button class="btn-primary">Learn More</button>
+          <button class="btn-outline">Our Services</button>
+        </div>
+        <div class="hero-controls">
+          <button class="hero-control-btn" id="heroPrev">&#8249;</button>
+          <button class="hero-control-btn" id="heroNext">&#8250;</button>
+          <div class="hero-dots" id="heroDots">
+            <div class="hero-dot active"></div>
+            <div class="hero-dot"></div>
+            <div class="hero-dot"></div>
+            <div class="hero-dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="42" stroke="#003b73" stroke-width="0.8" opacity="0.5"/>
+          <ellipse cx="50" cy="50" rx="22" ry="42" stroke="#003b73" stroke-width="0.6" opacity="0.35"/>
+          <line x1="8" y1="50" x2="92" y2="50" stroke="#003b73" stroke-width="0.6" opacity="0.35"/>
+          <line x1="50" y1="8" x2="50" y2="92" stroke="#003b73" stroke-width="0.6" opacity="0.2"/>
+          <circle cx="50" cy="50" r="3" fill="#003b73" opacity="0.8"/>
+          <circle cx="68" cy="32" r="2" fill="#003b73" opacity="0.5"/>
+          <circle cx="30" cy="65" r="1.5" fill="#003b73" opacity="0.4"/>
+          <circle cx="72" cy="60" r="1.5" fill="#003b73" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div style="padding: 24px 24px 0;">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">Partners section</span>
+      <span class="annot" style="margin-left:8px;">Improved — standalone floating card</span>
+    </div>
+    <div class="partners-card">
+      <div class="partners-top">
+        <div class="p-eyebrow">Trusted partners</div>
+        <div class="p-title">Our trusted partnership</div>
+        <div class="p-sub">Meet our visionary partners driving innovation and sustainable growth</div>
+        <div class="p-divider"></div>
+      </div>
+      <div class="logo-row">
+        <div class="logo-pill hi">Extron</div>
+        <div class="logo-pill hi">Lenovo</div>
+        <div class="logo-pill">Grandstream</div>
+        <div class="logo-pill">Gonsin</div>
+        <div class="logo-pill">ManageEngine</div>
+        <div class="logo-pill">Xorcom</div>
+        <div class="logo-pill hi">HP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section-pad">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">Services section</span>
+      <span class="annot" style="margin-left:8px;">Updated — stacked cards + smooth scroll</span>
+    </div>
+    <div class="sec-heading">
+      <h2>Our services</h2>
+      <p>Comprehensive IT solutions tailored to your business needs</p>
+      <div class="u-line"></div>
+    </div>
+    <div class="services-stack" id="servicesStack">
+      <div class="srv-card">
+        <div class="srv-img">
+          <div class="srv-icon" style="background:rgba(255,255,255,0.16);border:0.5px solid rgba(255,255,255,0.4);">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#fff" stroke-width="1.2"/><circle cx="11" cy="7" r="2" fill="#fff" opacity="0.7"/><circle cx="6" cy="15" r="2" fill="#fff" opacity="0.5"/><circle cx="16" cy="15" r="2" fill="#fff" opacity="0.5"/><line x1="11" y1="9" x2="6" y2="13" stroke="#fff" stroke-width="0.8" opacity="0.6"/><line x1="11" y1="9" x2="16" y2="13" stroke="#fff" stroke-width="0.8" opacity="0.6"/></svg>
+          </div>
+        </div>
+        <div class="srv-body">
+          <div class="srv-tag">UC &amp; AV</div>
+          <div class="srv-title">Unified Communication &amp; Audiovisual</div>
+          <div class="srv-desc">Seamless communication environments and immersive audiovisual experiences that connect teams.</div>
+          <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-img">
+          <div class="srv-icon" style="background:rgba(255,255,255,0.16);border:0.5px solid rgba(255,255,255,0.4);">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="7" width="16" height="10" rx="2" stroke="#fff" stroke-width="1.2"/><path d="M7 7V5a4 4 0 0 1 8 0v2" stroke="#fff" stroke-width="1.2"/><circle cx="11" cy="12" r="1.5" fill="#fff" opacity="0.8"/></svg>
+          </div>
+        </div>
+        <div class="srv-body">
+          <div class="srv-tag">Security</div>
+          <div class="srv-title">Networking and Security</div>
+          <div class="srv-desc">Robust network infrastructure and comprehensive security services ensuring seamless operations.</div>
+          <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-img">
+          <div class="srv-icon" style="background:rgba(255,255,255,0.16);border:0.5px solid rgba(255,255,255,0.4);">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="11" rx="2" stroke="#fff" stroke-width="1.2"/><path d="M8 18h6M11 15v3" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/><path d="M7 9h2M7 12h8" stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/></svg>
+          </div>
+        </div>
+        <div class="srv-body">
+          <div class="srv-tag">Development</div>
+          <div class="srv-title">Software Development</div>
+          <div class="srv-desc">Innovative software solutions that drive business growth and efficiency, tailored to unique needs.</div>
+          <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWS -->
+  <div class="section-pad">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">News &amp; updates</span>
+      <span class="annot" style="margin-left:8px;">Improved — proper "Read more" links</span>
+    </div>
+    <div class="sec-heading">
+      <h2>News and updates</h2>
+      <p>Latest insights, tech news and company announcements</p>
+      <div class="u-line"></div>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-img"><div class="news-img-inner"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-tag insight">In Sights</span><span class="news-date">01 July, 2024</span></div>
+          <div class="news-title">Odoo Roadshow 2024 – Dar Es Salaam</div>
+          <div class="news-excerpt">Discover the new features Odoo 17 offers and how it can help digitalise your company.</div>
+          <div class="news-read">Read more →</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img"><div class="news-img-inner"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-tag tech">Tech News</span><span class="news-date">01 July, 2024</span></div>
+          <div class="news-title">Why 2-factor authentication?</div>
+          <div class="news-excerpt">Safeguarding sensitive information has become critical as cyber threats continue to evolve.</div>
+          <div class="news-read">Read more →</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img"><div class="news-img-inner"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-tag insight">In Sights</span><span class="news-date">01 July, 2024</span></div>
+          <div class="news-title">Odoo ERP and CRM Software: Everything You Need to Know</div>
+          <div class="news-excerpt">Businesses are seeking powerful tools to improve operational efficiency and customer connections.</div>
+          <div class="news-read">Read more →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section-pad">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">Testimonials</span>
+      <span class="annot" style="margin-left:8px;">Improved — 3 cards, neutral background</span>
+    </div>
+    <div class="sec-heading">
+      <h2>What our clients say</h2>
+      <p>Real feedback from businesses we've helped transform</p>
+      <div class="u-line"></div>
+    </div>
+    <div class="testi-bg">
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+          <div class="testi-quote">"The team was professional and knowledgeable throughout the entire Odoo ERP implementation process."</div>
+          <div class="testi-divider"></div>
+          <div class="testi-person">
+            <div class="testi-avatar">LN</div>
+            <div><div class="testi-name">Lucas Ndyamkama</div><div class="testi-role">MD, Logmath Ltd</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+          <div class="testi-quote">"Our network infrastructure is now rock-solid. Response time and support quality has been outstanding."</div>
+          <div class="testi-divider"></div>
+          <div class="testi-person">
+            <div class="testi-avatar">MK</div>
+            <div><div class="testi-name">Maria Kihwele</div><div class="testi-role">CTO, NMB Bank</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star" style="background:rgba(239,159,39,0.25);"></div></div>
+          <div class="testi-quote">"The video conferencing setup has transformed how our teams collaborate across all our branches."</div>
+          <div class="testi-divider"></div>
+          <div class="testi-person">
+            <div class="testi-avatar">JM</div>
+            <div><div class="testi-name">John Msemwa</div><div class="testi-role">Director, CRDB Bank</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENTS -->
+  <div class="section-pad">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">Our clients</span>
+      <span class="annot" style="margin-left:8px;">Improved — scroll arrows + pagination dots</span>
+    </div>
+    <div class="sec-heading">
+      <h2>Some of our clients</h2>
+      <p>Trusted by leading organisations across Tanzania and beyond</p>
+      <div class="u-line"></div>
+    </div>
+    <div class="tabs">
+      <div class="tab active">Banks</div>
+      <div class="tab">Government</div>
+      <div class="tab">Telecom</div>
+      <div class="tab">Others</div>
+    </div>
+    <div class="clients-row">
+      <button class="scroll-btn">&#8249;</button>
+      <div class="clients-logos">
+        <div class="client-logo-card"><div class="client-logo-text">NMB</div></div>
+        <div class="client-logo-card"><div class="client-logo-text">NBC</div></div>
+        <div class="client-logo-card"><div class="client-logo-text">CRDB</div></div>
+        <div class="client-logo-card"><div class="client-logo-text">BOA</div></div>
+        <div class="client-logo-card"><div class="client-logo-text">EXIM</div></div>
+      </div>
+      <button class="scroll-btn">&#8250;</button>
+    </div>
+    <div class="clients-dots">
+      <div class="dot-ind active"></div>
+      <div class="dot-ind"></div>
+      <div class="dot-ind"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding: 28px 24px 0;">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">Footer</span>
+      <span class="annot" style="margin-left:8px;">Improved — higher contrast text</span>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <div class="logo-box" style="width:28px;height:28px;">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L8 3L13 8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3V14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="logo-text" style="color:#fff;">INVENTIONS<br>TECHNOLOGIES</div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.82);line-height:1.7;margin-bottom:14px;">Your trusted IT solutions partner since 2010.</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.82);margin-bottom:8px;">Our social links</div>
+        <div class="social-row">
+          <div class="social-btn">f</div>
+          <div class="social-btn">in</div>
+          <div class="social-btn">X</div>
+          <div class="social-btn">ig</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Useful links</div>
+        <div class="footer-link">Support</div>
+        <div class="footer-link">UC and AV</div>
+        <div class="footer-link">Network integration</div>
+        <div class="footer-link">Cyber security</div>
+        <div class="footer-link">System design</div>
+      </div>
+      <div>
+        <div class="footer-col-title">About us</div>
+        <div class="footer-link">Who we are</div>
+        <div class="footer-link">Our ambition &amp; values</div>
+        <div class="footer-link">Online store</div>
+        <div class="footer-link">Our locations</div>
+        <div class="footer-link">Careers</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact us</div>
+        <div class="footer-contact"><div class="footer-icon"></div>+255 22 277 5873</div>
+        <div class="footer-contact"><div class="footer-icon"></div>+255 746 985 750</div>
+        <div class="footer-contact"><div class="footer-icon"></div>info@it.co.tz</div>
+        <div class="footer-contact"><div class="footer-icon"></div>P.O.Box 34647</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Subscribe our newsletter</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.82);margin-bottom:10px;line-height:1.6;">Get the latest news and updates straight to your inbox.</div>
+        <div class="newsletter-row">
+          <div class="newsletter-input">Email address</div>
+          <button class="newsletter-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright &copy; 2026 IT. All rights reserved. &middot; VAT reg: 111-443-025</span>
+      <span>202 Lukuledi, Regent Estate, Dar es Salaam</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var track = document.getElementById("heroTrack");
+    var dots = document.querySelectorAll("#heroDots .hero-dot");
+    var prev = document.getElementById("heroPrev");
+    var next = document.getElementById("heroNext");
+    var slideCount = 4;
+    var index = 0;
+    var timer = null;
+
+    function renderSlide() {
+      track.style.transform = "translateX(-" + (index * 100) + "%)";
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle("active", i === index);
+      }
+    }
+
+    function go(step) {
+      index = (index + step + slideCount) % slideCount;
+      renderSlide();
+    }
+
+    function autoPlay() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(function () { go(1); }, 5000);
+    }
+
+    prev.addEventListener("click", function () { go(-1); autoPlay(); });
+    next.addEventListener("click", function () { go(1); autoPlay(); });
+    renderSlide();
+    autoPlay();
+  })();
+
+  (function () {
+    var stack = document.getElementById("servicesStack");
+    stack.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      stack.scrollBy({ top: event.deltaY, behavior: "smooth" });
+    }, { passive: false });
+  })();
+</script>
+</body>
+</html>
