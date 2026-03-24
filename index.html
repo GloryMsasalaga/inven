@@ -44,14 +44,17 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .slider-arrow:hover { border-color: #800020; color: #800020; }
 
 /* PARTNERS */
-.partners-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.3); border-radius: 14px; padding: 24px 28px; }
+.partners-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.3); border-radius: 14px; padding: 24px 28px; overflow: hidden; }
 .partners-top { text-align: center; margin-bottom: 20px; }
 .p-eyebrow { font-size: 10px; color: #b8445a; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px; }
 .p-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 4px; }
 .p-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
 .p-divider { width: 30px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
-.logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.logo-pill { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 7px; padding: 9px 16px; font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 500; }
+.logo-marquee { overflow: hidden; position: relative; mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%); }
+.logo-track { display: flex; gap: 14px; width: max-content; animation: marquee 20s linear infinite; }
+.logo-track:hover { animation-play-state: paused; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.logo-pill { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 7px; padding: 9px 16px; font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 500; white-space: nowrap; flex-shrink: 0; }
 .logo-pill.hi { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); }
 
 /* SECTIONS COMMON */
@@ -60,19 +63,19 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 .sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
-/* SERVICES - stacked cards */
-.services-wrapper { position: relative; perspective: 1200px; }
-.services-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
-.srv-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; opacity: 0; transform: translateY(40px) scale(0.95); transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-.srv-card.stacked-visible { opacity: 1; transform: translateY(0) scale(1); }
-.srv-card:nth-child(1) { transition-delay: 0s; }
-.srv-card:nth-child(2) { transition-delay: 0.15s; }
-.srv-card:nth-child(3) { transition-delay: 0.3s; }
-.srv-img { height: 90px; background: #252550; display: flex; align-items: center; justify-content: center; }
+/* SERVICES - stacking cards on scroll */
+.services-wrapper { position: relative; }
+.services-stack { display: flex; flex-direction: column; gap: 0; position: relative; min-height: 320px; }
+.srv-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; position: sticky; top: 80px; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+.srv-card:nth-child(1) { top: 80px; z-index: 1; }
+.srv-card:nth-child(2) { top: 96px; z-index: 2; }
+.srv-card:nth-child(3) { top: 112px; z-index: 3; }
+.srv-card + .srv-card { margin-top: -40px; }
+.srv-img { height: auto; min-height: 130px; background: #252550; display: flex; align-items: center; justify-content: center; }
 .srv-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-.srv-body { padding: 14px; }
+.srv-body { padding: 18px 20px; display: flex; flex-direction: column; justify-content: center; }
 .srv-tag { font-size: 9px; color: #b8445a; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.srv-title { font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+.srv-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; line-height: 1.3; }
 .srv-desc { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 12px; }
 .srv-link { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #b8445a; font-weight: 500; }
 .srv-link-arrow { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #b8445a; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #b8445a; }
@@ -290,7 +293,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   <div style="padding: 24px 24px 0;">
     <div style="padding: 0 0 6px;">
       <span class="section-label">Partners section</span>
-      <span class="annot" style="margin-left:8px;">Improved — standalone floating card</span>
+      <span class="annot" style="margin-left:8px;">Updated — infinite scrolling logo marquee</span>
     </div>
     <div class="partners-card">
       <div class="partners-top">
@@ -299,14 +302,23 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
         <div class="p-sub">Meet our visionary partners driving innovation and sustainable growth</div>
         <div class="p-divider"></div>
       </div>
-      <div class="logo-row">
-        <div class="logo-pill hi">Extron</div>
-        <div class="logo-pill hi">Lenovo</div>
-        <div class="logo-pill">Grandstream</div>
-        <div class="logo-pill">Gonsin</div>
-        <div class="logo-pill">ManageEngine</div>
-        <div class="logo-pill">Xorcom</div>
-        <div class="logo-pill hi">HP</div>
+      <div class="logo-marquee">
+        <div class="logo-track">
+          <div class="logo-pill hi">Extron</div>
+          <div class="logo-pill hi">Lenovo</div>
+          <div class="logo-pill">Grandstream</div>
+          <div class="logo-pill">Gonsin</div>
+          <div class="logo-pill">ManageEngine</div>
+          <div class="logo-pill">Xorcom</div>
+          <div class="logo-pill hi">HP</div>
+          <div class="logo-pill hi">Extron</div>
+          <div class="logo-pill hi">Lenovo</div>
+          <div class="logo-pill">Grandstream</div>
+          <div class="logo-pill">Gonsin</div>
+          <div class="logo-pill">ManageEngine</div>
+          <div class="logo-pill">Xorcom</div>
+          <div class="logo-pill hi">HP</div>
+        </div>
       </div>
     </div>
   </div>
@@ -315,7 +327,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   <div class="section-pad">
     <div style="padding: 0 0 6px;">
       <span class="section-label">Services section</span>
-      <span class="annot" style="margin-left:8px;">Updated — stacked cards scroll animation</span>
+      <span class="annot" style="margin-left:8px;">Updated — stacking cards on scroll</span>
     </div>
     <div class="sec-heading">
       <h2>Our services</h2>
@@ -323,7 +335,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
       <div class="u-line"></div>
     </div>
     <div class="services-wrapper">
-      <div class="services-grid" id="servicesGrid">
+      <div class="services-stack">
         <div class="srv-card">
           <div class="srv-img">
             <div class="srv-icon" style="background:rgba(128,0,32,0.15);border:0.5px solid rgba(128,0,32,0.3);">
@@ -333,7 +345,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
           <div class="srv-body">
             <div class="srv-tag">UC &amp; AV</div>
             <div class="srv-title">Unified Communication &amp; Audiovisual</div>
-            <div class="srv-desc">Seamless communication environments and immersive audiovisual experiences that connect teams.</div>
+            <div class="srv-desc">Seamless communication environments and immersive audiovisual experiences that connect teams across locations.</div>
             <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
           </div>
         </div>
@@ -346,7 +358,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
           <div class="srv-body">
             <div class="srv-tag">Security</div>
             <div class="srv-title">Networking and Security</div>
-            <div class="srv-desc">Robust network infrastructure and comprehensive security services ensuring seamless operations.</div>
+            <div class="srv-desc">Robust network infrastructure and comprehensive security services ensuring seamless operations and protection.</div>
             <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
           </div>
         </div>
@@ -359,7 +371,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
           <div class="srv-body">
             <div class="srv-tag">Development</div>
             <div class="srv-title">Software Development</div>
-            <div class="srv-desc">Innovative software solutions that drive business growth and efficiency, tailored to unique needs.</div>
+            <div class="srv-desc">Innovative software solutions that drive business growth and efficiency, tailored to your unique needs.</div>
             <div class="srv-link"><div class="srv-link-arrow">→</div> Learn more</div>
           </div>
         </div>
@@ -592,20 +604,19 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// Services stacked cards scroll animation
-function checkServicesVisible() {
+// Services stacking cards - shadow depth on scroll
+window.addEventListener('scroll', function() {
   var cards = document.querySelectorAll('.srv-card');
   cards.forEach(function(card) {
     var rect = card.getBoundingClientRect();
-    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    if (rect.top < windowHeight - 60) {
-      card.classList.add('stacked-visible');
+    var distFromTop = rect.top - 80;
+    if (distFromTop < 20) {
+      card.style.boxShadow = '0 8px 28px rgba(0,0,0,0.3)';
+    } else {
+      card.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
     }
   });
-}
-
-window.addEventListener('scroll', checkServicesVisible);
-window.addEventListener('load', checkServicesVisible);
+});
 
 // Back to top visibility
 var backToTopBtn = document.getElementById('backToTop');
