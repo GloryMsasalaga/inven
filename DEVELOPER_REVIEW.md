@@ -154,46 +154,58 @@ Each slide follows the same two-column layout:
 - **Dots:** 4 indicators, inactive = 8×8px circle `rgba(0,0,0,0.15)`, active = 24×8px rounded rect in `#800020`
 - **Layout:** Centered row: `[← arrow] [dot] [dot] [dot] [dot] [→ arrow]`
 
-### 4.3 Partners Section
+### 4.3 Partners Section — Infinite Scrolling Marquee
 
-**Card style:** Navy `#1a1a3e` background, rounded 14px, padding 24×28px
-**Layout:** Centered text header + flex-wrap logo row
+**Card style:** Navy `#1a1a3e` background, rounded 14px, padding 24×28px, `overflow: hidden`
+**Layout:** Centered text header + infinite scrolling logo marquee
 
 - **Eyebrow:** "TRUSTED PARTNERS" — 10px, `#b8445a`, uppercase
 - **Title:** "Our trusted partnership" — 15px, white
 - **Subtitle:** 11px, `rgba(255,255,255,0.45)`
 - **Divider:** 30×2px burgundy bar, centered
-- **Logo pills:** 7 items, `rgba(255,255,255,0.06)` background, 0.5px border
+
+#### Marquee Specs
+
+- **Container (`.logo-marquee`):** `overflow: hidden` with edge fade using CSS `mask-image` gradient (transparent at 0% and 100%, solid from 8% to 92%)
+- **Track (`.logo-track`):** `display: flex`, `width: max-content`, CSS keyframe animation
+- **Animation:** `@keyframes marquee` — `translateX(0)` to `translateX(-50%)`, 20s linear infinite
+- **Pause on hover:** `animation-play-state: paused`
+- **Seamless loop:** Logo pills are duplicated (7 items × 2 = 14 elements) so the second set fills in as the first scrolls out
+- **Logo pills:** `rgba(255,255,255,0.06)` background, 0.5px border, `white-space: nowrap`, `flex-shrink: 0`
   - Standard: `rgba(255,255,255,0.55)` text
   - Highlighted (`.hi`): `rgba(255,255,255,0.8)` text, brighter border
   - Partners listed: Extron, Lenovo, Grandstream, Gonsin, ManageEngine, Xorcom, HP
 
-### 4.4 Services Section — Stacked Cards Animation
+### 4.4 Services Section — Stacking Cards on Scroll
 
-**Layout:** 3-column CSS Grid, gap 14px
-**Animation:** Scroll-triggered stacked card reveal
+**Layout:** Vertical stack with `position: sticky`
+**Animation:** Cards stack on top of each other as the user scrolls
 
-#### Animation Specs
-- **Initial state:** `opacity: 0; transform: translateY(40px) scale(0.95)`
-- **Visible state (`.stacked-visible`):** `opacity: 1; transform: translateY(0) scale(1)`
-- **Transition:** opacity 0.5s ease, transform 0.6s `cubic-bezier(0.4, 0, 0.2, 1)`
-- **Stagger delays:** Card 1 = 0s, Card 2 = 0.15s, Card 3 = 0.3s
-- **Trigger:** Fires when card top enters viewport minus 60px offset
-- **Wrapper:** `perspective: 1200px` on parent
+#### Stacking Specs
 
-#### Card Structure
+- **Container (`.services-stack`):** `flex-direction: column`, `min-height: 320px`
+- **Cards (`.srv-card`):** `position: sticky` with staggered `top` values
+  - Card 1: `top: 80px`, `z-index: 1`
+  - Card 2: `top: 96px`, `z-index: 2`
+  - Card 3: `top: 112px`, `z-index: 3`
+- **Overlap:** `margin-top: -40px` on cards 2 and 3 creates the stacking overlap
+- **Transition:** `transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)`, `box-shadow 0.4s ease`
+- **Dynamic shadow:** JS listener deepens `box-shadow` to `0 8px 28px rgba(0,0,0,0.3)` when a card is pinned (within 20px of its sticky top)
+- **Default shadow:** `0 2px 12px rgba(0,0,0,0.15)`
+
+#### Card Structure (horizontal layout)
 
 ```
-┌──────────────────────┐
-│   Image Area (90px)  │  ← #252550 background
-│     [Icon 40×40]     │  ← colored icon with matching border
-├──────────────────────┤
-│  TAG LABEL           │  ← 9px uppercase, #b8445a
-│  Card Title          │  ← 13px white
-│  Description text    │  ← 11px, rgba(255,255,255,0.5)
-│  [→] Learn more      │  ← burgundy link with circle arrow
-└──────────────────────┘
+┌────────────┬──────────────────────────────────────┐
+│            │  TAG LABEL         ← 9px uppercase   │
+│  Icon area │  Card Title        ← 14px white      │
+│  (120px)   │  Description text  ← 11px light      │
+│  #252550   │  [→] Learn more    ← burgundy link   │
+└────────────┴──────────────────────────────────────┘
 ```
+
+- **Icon area:** 120px wide, `min-height: 130px`, `#252550` background, centered 40×40px icon
+- **Content area:** `padding: 18px 20px`, flex column, vertically centered
 
 #### Service Cards
 
@@ -334,21 +346,43 @@ Who we are, Our ambition & values, Online store, Our locations, Careers
 - `goToSlide(idx)` — jump to specific slide
 - `resetAutoSlide()` — clears and restarts the 4s interval
 
-### 5.2 Services Scroll Animation
+### 5.2 Services Stacking Cards
 
 | Behavior | Detail |
 |----------|--------|
-| Trigger | `scroll` and `load` events on `window` |
-| Detection | `getBoundingClientRect().top < windowHeight - 60` |
-| Effect | Adds `.stacked-visible` class (one-way, does not remove) |
-| Stagger | nth-child transition-delays: 0s, 0.15s, 0.3s |
+| Mechanism | CSS `position: sticky` with staggered `top` offsets |
+| Scroll effect | As user scrolls, each card pins at its top position; the next card slides up and covers it |
+| Shadow feedback | JS scroll listener deepens box-shadow when card distance from sticky top < 20px |
+| z-index order | Card 1 = 1, Card 2 = 2, Card 3 = 3 (later cards on top) |
 
-### 5.3 Hover States (CSS only)
+### 5.3 Partners Infinite Scroll
+
+| Behavior | Detail |
+|----------|--------|
+| Mechanism | CSS `@keyframes marquee` animation on `.logo-track` |
+| Duration | 20 seconds, `linear`, `infinite` |
+| Direction | Right to left (`translateX(0)` → `translateX(-50%)`) |
+| Seamless loop | Logos duplicated (7 × 2 = 14 items); animation shifts exactly 50% |
+| Hover | `animation-play-state: paused` |
+| Edge fade | CSS `mask-image` linear gradient fades edges to transparent |
+
+### 5.4 Back-to-Top Button
+
+| Behavior | Detail |
+|----------|--------|
+| Trigger | Appears when `window.scrollY > 300` |
+| Action | `window.scrollTo({top:0, behavior:'smooth'})` |
+| Transition | opacity, transform, visibility — 0.3s ease |
+| Hover | Background darkens to `#5c0018`, shadow deepens |
+
+### 5.5 Hover States (CSS only)
 
 - **Slider arrows:** border-color and color transition to burgundy on hover
 - **Slider dots:** 0.3s ease transition on all properties
+- **Partner marquee:** animation pauses on hover
+- **Back-to-top:** background darkens, shadow deepens
 
-### 5.4 Non-functional Elements (wireframe only)
+### 5.6 Non-functional Elements (wireframe only)
 
 These elements are visually present but have no JS behavior. Developers must implement:
 - Tab switching in Clients section
@@ -383,12 +417,14 @@ The wireframe is designed at **960px max-width** and does not include responsive
 |---------|---------|---------------------|
 | Nav | Horizontal links + CTA | Hamburger menu needed |
 | Hero slider | 2-column (text + illustration) | Stack vertically, reduce H1 size |
-| Services grid | 3 columns | Single column stack |
+| Partners marquee | Continuous scroll | Reduce speed, ensure touch-friendly |
+| Services stack | Horizontal cards, sticky | Adjust sticky tops for smaller viewport |
 | News grid | 3 columns | Single column or 2-col |
 | Testimonials grid | 3 columns | Horizontal swiper or single stack |
 | Clients carousel | 5 visible logos | 2-3 visible, scroll functional |
 | Footer grid | 5 columns | 2-column or single stack |
 | Slider dots/arrows | Touch targets 30px | Increase to min 44px for mobile |
+| Back-to-top button | 40px fixed bottom-right | Increase to 48px on mobile |
 
 ---
 
@@ -407,6 +443,7 @@ All illustrations are inline SVG. No external images, fonts, or assets are requi
 | Service card 2 | Padlock with keyhole |
 | Service card 3 | Monitor with code lines |
 | Footer logo | Arrow/upload icon (14×14, smaller variant) |
+| Back-to-top button | Upward chevron (16×16) |
 
 ---
 
@@ -419,8 +456,14 @@ Developers should verify the following during implementation:
 - [ ] Hero slider wraps from slide 4 back to slide 1 (and vice versa)
 - [ ] Slider dots reflect the active slide state
 - [ ] Manual slider interaction resets the auto-advance timer
-- [ ] Service cards animate on scroll with staggered delays
-- [ ] Service card animation only triggers once (does not reset on scroll-up)
+- [ ] Partner logos scroll infinitely with seamless loop
+- [ ] Partner marquee pauses on hover
+- [ ] Partner marquee edge fade is visible on both sides
+- [ ] Service cards stack on top of each other when scrolling
+- [ ] Service card sticky positions are correct (80px, 96px, 112px)
+- [ ] Service card box-shadow deepens when pinned
+- [ ] Back-to-top button appears after scrolling 300px
+- [ ] Back-to-top button smooth-scrolls to top on click
 - [ ] All annotation labels (`.section-label`, `.annot`) are removed in production
 - [ ] Tab switching in Clients section is functional
 - [ ] Client logo scroll buttons work
@@ -440,6 +483,7 @@ Developers should verify the following during implementation:
 /workspace
 ├── index.html              ← Wireframe (this file)
 ├── DEVELOPER_REVIEW.md     ← This document
+├── DEVELOPER_REVIEW.pdf    ← Downloadable PDF version
 └── README.md               ← Repository readme
 ```
 
