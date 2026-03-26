@@ -1,8 +1,8 @@
 # Inventions Technologies — Wireframe Developer Review Document
 
 **File:** `index.html`
-**Last Updated:** March 24, 2026
-**Status:** Wireframe — ready for developer review
+**Last Updated:** March 26, 2026
+**Status:** Wireframe — active development in progress
 
 ---
 
@@ -89,17 +89,18 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
 **Location:** Top of page, sticky-capable
 **Layout:** Flexbox, `space-between`
+**Logo:** `download.png` or `logo.png` image file, 35px height, auto width
 **Structure:**
 
 ```
-[Logo Box + Logo Text]    [Home | About | Services | Blogs | Career]    [Contact Us]
+[Logo Image]    [Home | About | Services | Blogs | Career]    [Contact Us]
 ```
 
-- **Logo box:** 30×30px, burgundy background, rounded 6px, white SVG arrow icon
-- **Logo text:** "INVENTIONS / TECHNOLOGIES" two-line, 11px, navy color
-- **Nav links:** 12px, inactive `rgba(0,0,0,0.5)`, active `#1a1a3e` with burgundy 1.5px bottom border
+- **Logo image:** 35px height, maintains aspect ratio
+- **Logo box (deprecated):** Previously 30×30px burgundy background with SVG icon — now replaced with image
+- **Nav links:** 12px, inactive `rgba(255,255,255,0.6)`, active `#ffffff` with burgundy 1.5px bottom border
 - **CTA button:** Burgundy background, white text, 12px, padding 8×18px, rounded 7px
-- **Bottom border:** `0.5px solid rgba(0,0,0,0.08)`
+- **Bottom border:** `0.5px solid rgba(255,255,255,0.08)`
 
 ### 4.2 Hero Slider
 
@@ -109,6 +110,31 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 **Transition:** `0.6s cubic-bezier(0.4, 0, 0.2, 1)`
 **Auto-advance:** Every 4 seconds
 **Min height:** 320px per slide
+**Image containers:** 260×260px with curved design (24px border-radius), wave shapes behind images
+
+#### Image Assets (NEW — March 26, 2026)
+
+| Slide | Image | Format | Notes |
+|-------|-------|--------|-------|
+| 1 | `technologyprovider.avif` | AVIF | Technology provider service |
+| 2 | `collaboration.jpg` | JPEG | Video conferencing/collaboration |
+| 3 | `security.jpg` | JPEG | Network security services |
+| 4 | `callcenter.avif` | AVIF | Call center/customer engagement |
+
+**Image container specs:**
+- Width: 260px (increased from 180px)
+- Height: 260px (increased from 180px)
+- Border-radius: 24px (changed from 50% circular)
+- Background: `rgba(100,110,255,0.06)`
+- Border: `0.5px solid rgba(100,110,255,0.15)`
+- Position: relative with overflow hidden
+
+**Wave background:**
+- SVG wave shape positioned behind images
+- Color: Navy blue `#001a66`
+- Opacity: 40%
+- Path: Smooth curved wave pattern
+- z-index: Wave at 1, image at 2
 
 #### Slide Content Structure
 
@@ -123,7 +149,7 @@ Each slide follows the same two-column layout:
 - **H1:** "The Technology **Solutions** Provider"
 - **Body:** Company intro paragraph (founded 2010)
 - **Buttons:** "Learn More" (primary) + "Our Services" (outline)
-- **Illustration:** Globe/orbit SVG in blue (#378ADD)
+- **Image:** `technologyprovider.avif` — 260×260px with curved corners and wave background
 
 #### Slide 2 — "Revolutionize Collaboration"
 - **Eyebrow:** "Next-Gen Collaboration"
@@ -131,7 +157,7 @@ Each slide follows the same two-column layout:
 - **Subheading:** "Next-Gen Video Conferencing" (14px, burgundy)
 - **Body:** Video conferencing benefits paragraph
 - **Buttons:** "Explore Solutions" (primary) + "Watch Demo" (outline)
-- **Illustration:** Video conference grid layout SVG
+- **Image:** `collaboration.jpg` — 260×260px with curved corners and wave background
 
 #### Slide 3 — "Secure Your Network"
 - **Eyebrow:** "Protect Your Business"
@@ -139,7 +165,7 @@ Each slide follows the same two-column layout:
 - **Subheading:** "Advanced Security Solutions" (14px, burgundy)
 - **Body:** Network security capabilities paragraph
 - **Buttons:** "Get Protected" (primary) + "Security Audit" (outline)
-- **Illustration:** Shield with checkmark SVG
+- **Image:** `security.jpg` — 260×260px with curved corners and wave background
 
 #### Slide 4 — "Call Center Solutions"
 - **Eyebrow:** "Communication Hub"
@@ -147,16 +173,47 @@ Each slide follows the same two-column layout:
 - **Subheading:** "Intelligent Customer Engagement" (14px, burgundy)
 - **Body:** Call center capabilities paragraph
 - **Buttons:** "Get Started" (primary) + "Request Demo" (outline)
-- **Illustration:** Headset with dial pad SVG
+- **Image:** `callcenter.avif` — 260×260px with curved corners and wave background
 
 #### Slider Controls
 - **Arrows:** 30×30px circles, `0.5px` border, hover → burgundy border + color
 - **Dots:** 4 indicators, inactive = 8×8px circle `rgba(0,0,0,0.15)`, active = 24×8px rounded rect in `#800020`
 - **Layout:** Centered row: `[← arrow] [dot] [dot] [dot] [dot] [→ arrow]`
 
-### 4.3 Partners Section — Infinite Scrolling Marquee
+### 4.3 Wave Dividers (NEW — March 26, 2026)
 
-**Card style:** Navy `#1a1a3e` background, rounded 14px, padding 24×28px, `overflow: hidden`
+**Purpose:** Visual separators between major sections
+**Implementation:** `.wave-divider` class with background image
+**Image file:** `wave.png`
+**Specifications:**
+- Height: 80px
+- Background: `url('wave.png') repeat-x center/cover`
+- Opacity: 15% (subtle decoration)
+- Placement:
+  - Before Hero Slider
+  - Before About Us
+  - Before Partners
+  - Before News
+  - Before Testimonials
+  - Before Footer
+
+### 4.4 About Us Section (UPDATED)
+
+**Card style:** Transparent background with transparent content area
+**Image:** `about2.jpg` — fills the left column with object-fit cover
+**Text layout:** Right column with justified text alignment
+**H2 color:** White (`#ffffff`)
+**P color:** Light white (`rgba(255,255,255,0.55)`)
+**Description:** Justified text (`text-align: justify`)
+
+#### Content
+- **Title:** "About Us"
+- **Subtitle:** "Founded in 2010, Inventions Technologies has been a trusted partner in delivering innovative IT solutions"
+- **Description:** Full paragraph about company expertise and mission
+
+### 4.5 Partners Section
+
+**Card style:** Navy `#000a1f` background (updated from `#1a1a3e`), rounded 14px, padding 24×28px, `overflow: hidden`
 **Layout:** Centered text header + infinite scrolling logo marquee
 
 - **Eyebrow:** "TRUSTED PARTNERS" — 10px, `#b8445a`, uppercase
@@ -218,7 +275,7 @@ Each slide follows the same two-column layout:
 ### 4.5 News & Updates Section
 
 **Layout:** 3-column CSS Grid, gap 14px
-**Card background:** Navy `#1a1a3e`, rounded 12px
+**Outer container:** Navy `#000a1f` background (updated from `#1a1a3e`), rounded 14px, padding 32×28px
 
 #### Card Structure
 
@@ -247,10 +304,10 @@ Each slide follows the same two-column layout:
 2. "Why 2-factor authentication?" — Tech News, 01 July 2024
 3. "Odoo ERP and CRM Software: Everything You Need to Know" — In Sights, 01 July 2024
 
-### 4.6 Testimonials Section
+### 4.8 Testimonials Section
 
-**Outer container:** Navy `#1a1a3e`, rounded 14px, padding 28px
-**Card background:** `#222255`, rounded 10px, padding 16px
+**Outer container:** Navy `#000a1f` background (updated), rounded 14px, padding 32×28px
+**Card background:** Light gray `#dadadb` (updated for contrast)
 **Layout:** 3-column CSS Grid, gap 12px
 
 #### Card Structure
@@ -274,35 +331,54 @@ Each slide follows the same two-column layout:
 | 2 | Maria Kihwele | CTO, NMB Bank | `#185FA5` (blue) | 5/5 |
 | 3 | John Msemwa | Director, CRDB Bank | `#0F6E56` (green) | 4/5 (last star faded) |
 
-### 4.7 Clients Section
+### 4.9 Clients Section (UPDATED — March 26, 2026)
 
-**Layout:** Tabs bar + horizontal scroll row + pagination dots
+**Outer container:** Navy `#000a1f` background, rounded 14px, padding 32×28px
+**Layout:** Tabs bar + 4 client logo groups + pagination dots
+**Auto-scroll:** Automatically cycles through all 4 tabs every 5 seconds
+**Manual controls:** Click tab or arrow buttons to switch, resets auto-scroll timer
+
+#### Client Categories
+
+| Tab | Clients | Count |
+|-----|---------|-------|
+| Banks | NMB, NBC, CRDB, BOA, EXIM | 5 |
+| Government | TCRA, BOT, Judiciary of Tanzania, NAOT, PCCB, Tanesco, EWURA | 7 |
+| Telecom | Tigo, TTCL, Airtel, Vodacom | 4 |
+| Others | Bowmans, British Business Group, Ifakara Health Institute, Tembo Nickel, PWC | 5 |
 
 #### Tabs
-- 4 tabs: Banks (active), Government, Telecom, Others
-- Active: `#1a1a3e` text, burgundy 2px bottom border
-- Inactive: `rgba(0,0,0,0.4)` text
+- 4 tabs: Banks, Government, Telecom, Others
+- Active: `#ffffff` text, burgundy 2px bottom border
+- Inactive: `rgba(255,255,255,0.5)` text
+- Click handlers: `switchClientTab(tabIndex)` — hides all, shows selected
+- **Auto-scroll enabled:** Cycles every 5000ms
 
 #### Logo Carousel
-- **Scroll buttons:** 28×28px circles at left/right
-- **Logo cards:** Navy `#1a1a3e` background, rounded 10px, white text, min-width 90px
-- **Logos shown:** NMB, NBC, CRDB, BOA, EXIM
-- **Overflow:** Hidden (horizontal scroll expected)
+- **Scroll buttons:** 28×28px circles at left/right with functions `scrollClientLogos(-1)` and `scrollClientLogos(1)`
+- **Logo cards:** Navy background `#f5f5f5` text, rounded 10px, white text, min-width 90px
+- **Multiple containers:** `#clientsLogos-0`, `#clientsLogos-1`, `#clientsLogos-2`, `#clientsLogos-3` toggle display:none on tab switch
+- **Each container shows appropriate client logos for that tab**
 
 #### Pagination Dots
 - 3 dots, inactive = 6×6px circle `rgba(0,0,0,0.15)`
 - Active = 18×6px rounded rect, burgundy `#800020`
 
-### 4.8 Footer
+### 4.10 Footer (UPDATED — March 26, 2026)
 
-**Background:** `#12122e` (darkest navy)
+**Background:** Navy `#000a1f` (updated from `#12122e`)
 **Layout:** 5-column CSS Grid (`1.4fr 1.2fr 1fr 1fr 1.2fr`), gap 20px
-**Top border:** `0.5px solid rgba(26,26,62,0.3)`
+**Top border:** `0.5px solid rgba(138,142,255,0.15)`
 
-#### Column 1 — Brand
-- Logo (28×28px burgundy box) + "INVENTIONS TECHNOLOGIES" in white
+#### Column 1 — Brand (UPDATED)
+- Logo image (35px height) instead of box icon
 - Tagline: "Your trusted IT solutions partner since 2010."
-- Social buttons: 4 circles (28×28px) — f, in, X, ig
+- **Social buttons:** 4 anchor links (28×28px circles) with hover effects
+  - Facebook (f) → https://web.facebook.com/inventectz
+  - LinkedIn (in) → https://www.linkedin.com/company/13268668
+  - Twitter (X) → https://twitter.com/InventionsTech1
+  - Instagram (ig) → https://www.instagram.com/inventectz/
+  - **Hover state:** Border color `#800020`, text color `#800020`, background `rgba(128,0,32,0.1)`
 
 #### Column 2 — Useful Links
 Support, UC and AV, Network integration, Cyber security, System design
@@ -428,63 +504,129 @@ The wireframe is designed at **960px max-width** and does not include responsive
 
 ---
 
-## 8. Asset Inventory
+## 8. Asset Inventory (UPDATED — March 26, 2026)
 
-All illustrations are inline SVG. No external images, fonts, or assets are required.
+### Image Files Required
 
-| Location | SVG Description |
-|----------|----------------|
-| Nav logo | Arrow/upload icon (16×16) |
-| Hero slide 1 | Globe with orbit lines and dots |
-| Hero slide 2 | Video conference grid with monitor stand |
-| Hero slide 3 | Shield with checkmark and dashed orbit |
-| Hero slide 4 | Headset person with dial pad buttons |
-| Service card 1 | Network nodes connected by lines |
-| Service card 2 | Padlock with keyhole |
-| Service card 3 | Monitor with code lines |
-| Footer logo | Arrow/upload icon (14×14, smaller variant) |
-| Back-to-top button | Upward chevron (16×16) |
+| File | Location | Format | Size | Purpose |
+|------|----------|--------|------|----------|
+| `download.png` or `logo.png` | Navigation | PNG | 35px height | Company logo in nav |
+| `about2.jpg` | About Us section | JPEG | Variable | About section banner image |
+| `technologyprovider.avif` | Hero Slide 1 | AVIF | 260×260px | Technology provider service hero |
+| `collaboration.jpg` | Hero Slide 2 | JPEG | 260×260px | Collaboration/video conferencing |
+| `security.jpg` | Hero Slide 3 | JPEG | 260×260px | Network security |
+| `callcenter.avif` | Hero Slide 4 | AVIF | 260×260px | Call center solutions |
+| `wave.png` | Section dividers | PNG | 960×80px | Wave pattern dividers |
+
+### Inline SVG Assets (kept for icons)
+
+The following SVG elements remain inline (no external files):
+- Back-to-top button arrow chevron (16×16)
+- Various wave path shapes in hero containers
 
 ---
 
-## 9. Implementation Checklist
+## 9. Update Log — March 26, 2026
+
+Significant changes made during active development:
+
+### Visual Updates
+- ✅ Changed page background from light to dark theme (black `#000000`)
+- ✅ Updated section container backgrounds to navy `#000a1f`
+- ✅ Replaced SVG illustrations with high-quality images in hero section
+- ✅ Increased hero image size from 180px to 260px
+- ✅ Changed hero image shape from circular (50%) to curved (24px border-radius)
+- ✅ Added wave shape backgrounds behind hero images (navy `#001a66`, 40% opacity)
+- ✅ Made About Us section background fully transparent
+- ✅ Added `about2.jpg` image to About Us section
+- ✅ Applied text-justify to About Us description paragraph
+- ✅ Added wave divider graphics between all major sections
+
+### Navigation Updates
+- ✅ Replaced text logo with image logo (`download.png`, 35px height)
+- ✅ Updated nav text colors for dark theme (white on black)
+
+### Partner Section Updates
+- ✅ Expanded partner list from 7 to 40+ companies
+- ✅ Organized by solution category (Network, Systems, Datacenter, Collaboration)
+
+### Clients Section Updates
+- ✅ Implemented 4 separate client groups (Banks, Government, Telecom, Others)
+- ✅ Added auto-scrolling feature (5-second interval between tabs)
+- ✅ Implemented `switchClientTab()` function for tab switching
+- ✅ Added 26 client organizations across all categories
+
+### Footer Updates
+- ✅ Changed footer background to navy `#000a1f`
+- ✅ Replaced logo box with image logo
+- ✅ Added functional social media links with hover effects:
+  - Facebook: https://web.facebook.com/inventectz
+  - LinkedIn: https://www.linkedin.com/company/13268668
+  - Twitter: https://twitter.com/InventionsTech1
+  - Instagram: https://www.instagram.com/inventectz/
+
+### Required Assets (New)
+- [ ] `download.png` — Logo image for navigation (35px height)
+- [ ] `about2.jpg` — About section banner image
+- [ ] `technologyprovider.avif` — Hero slide 1 image (260×260px)
+- [ ] `collaboration.jpg` — Hero slide 2 image (260×260px)
+- [ ] `security.jpg` — Hero slide 3 image (260×260px)
+- [ ] `callcenter.avif` — Hero slide 4 image (260×260px)
+- [ ] `wave.png` — Wave divider pattern (960×80px)
+
+## 10. Implementation Checklist
 
 Developers should verify the following during implementation:
 
-- [ ] Color tokens match the palette table in Section 2
-- [ ] Hero slider auto-advances every 4 seconds
-- [ ] Hero slider wraps from slide 4 back to slide 1 (and vice versa)
-- [ ] Slider dots reflect the active slide state
-- [ ] Manual slider interaction resets the auto-advance timer
-- [ ] Partner logos scroll infinitely with seamless loop
-- [ ] Partner marquee pauses on hover
-- [ ] Partner marquee edge fade is visible on both sides
-- [ ] Service cards stack on top of each other when scrolling
-- [ ] Service card sticky positions are correct (80px, 96px, 112px)
-- [ ] Service card box-shadow deepens when pinned
-- [ ] Back-to-top button appears after scrolling 300px
-- [ ] Back-to-top button smooth-scrolls to top on click
-- [ ] All annotation labels (`.section-label`, `.annot`) are removed in production
-- [ ] Tab switching in Clients section is functional
-- [ ] Client logo scroll buttons work
-- [ ] Newsletter form has validation and submission logic
-- [ ] Nav links route to correct pages
-- [ ] "Contact Us" CTA has assigned action
-- [ ] All "Learn more" / "Read more" links navigate to correct destinations
-- [ ] Responsive breakpoints are added for mobile/tablet
-- [ ] Touch swipe support added to hero slider for mobile
-- [ ] Accessibility: keyboard navigation for slider, ARIA labels, focus indicators
+- [ ] All image assets are present in workspace directory (see Asset Inventory)
+- [ ] Hero slider displays images with wave backgrounds correctly
+- [ ] Hero images are 260×260px with 24px rounded corners
+- [ ] About Us section background is transparent, shows image properly
+- [ ] About Us text is justified and white on dark background
+- [ ] Wave dividers appear between all major sections at 15% opacity
+- [ ] Clients section auto-scrolls through 4 tabs every 5 seconds
+- [ ] Clients section manual tab clicks reset and switch content properly
+- [ ] Social media buttons link to correct URLs and open in new tabs
+- [ ] Social buttons have hover effects (burgundy color, subtle background)
+- [ ] Footer background is dark navy `#000a1f`
+- [ ] Logo image in footer is 35px height
+- [ ] Partner list shows 40+ companies organized by category
+- [ ] Government clients include: TCRA, BOT, Judiciary, NAOT, PCCB, Tanesco, EWURA
+- [ ] Telecom clients include: Tigo, TTCL, Airtel, Vodacom
+- [ ] Service cards have proper hover effects (burgundy background, white text)
+- [ ] Color tokens match the updated palette (navy `#000a1f` for sections)
+- [ ] All text contrast meets WCAG AA standards on dark backgrounds
+- [ ] Annotation labels are removed in production build
+- [ ] Responsive breakpoints handle dark theme properly on mobile
+- [ ] Back-to-top button functions correctly
+- [ ] All links have proper cursor and hover states
+
+### Deprecated/Removed
+- [ ] Remove old SVG illustrations from hero slides
+- [ ] Remove old nav logo SVG box and text
+- [ ] Update color references: `#1a1a3e` → `#000a1f` in section containers
+- [ ] Remove old footer logo icon
 
 ---
 
 ## 10. File Structure
 
+No build system is required to view the wireframe. Open `index.html` directly in a browser.
+
+### Required Asset Files (Place in workspace root directory)
+
 ```
 /workspace
-├── index.html              ← Wireframe (this file)
-├── DEVELOPER_REVIEW.md     ← This document
-├── DEVELOPER_REVIEW.pdf    ← Downloadable PDF version
-└── README.md               ← Repository readme
+├── index.html                    ← Wireframe (this file)
+├── DEVELOPER_REVIEW.md           ← This document
+├── DEVELOPER_REVIEW.pdf          ← PDF version (auto-generated)
+├── download.png                  ← Navigation logo (NEW)
+├── about2.jpg                    ← About section image (NEW)
+├── technologyprovider.avif       ← Hero slide 1 (NEW)
+├── collaboration.jpg             ← Hero slide 2 (NEW)
+├── security.jpg                  ← Hero slide 3 (NEW)
+├── callcenter.avif               ← Hero slide 4 (NEW)
+├── wave.png                      ← Section dividers (NEW)
+├── README.md                     ← Repository readme
+└── landing-page-wireframe.html   ← Alternative light theme version
 ```
-
-No build system is required to view the wireframe. Open `index.html` directly in a browser.
