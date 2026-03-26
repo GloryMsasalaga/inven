@@ -6,54 +6,55 @@
 <title>Inventions Technologies — Full Page Wireframe</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+body { background: #000000; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
-/* ✅ FIX #1: Changed overflow:hidden → overflow:clip
-   overflow:hidden creates a scroll container which breaks position:sticky on all descendants.
-   overflow:clip preserves the visual border-radius clipping without trapping sticky elements. */
-.page { background: #f0f0f0; font-family: inherit; border-radius: 12px; overflow: clip; border: 0.5px solid rgba(0,0,0,0.1); max-width: 960px; margin: 0 auto; }
+.page { background: #000000; font-family: inherit; border-radius: 12px; overflow: clip; border: 0.5px solid rgba(255,255,255,0.1); max-width: 960px; margin: 0 auto; position: relative; }
 
-.annot { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 4px; background: rgba(128,0,32,0.12); color: #a0304a; margin-bottom: 8px; letter-spacing: 0.4px; }
+.wave-divider { position: relative; width: 100%; height: 80px; background: url('wave.png') repeat-x center/cover; opacity: 0.15; }
+
+.annot { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 4px; background: rgba(184,68,90,0.2); color: #ff6b9d; margin-bottom: 8px; letter-spacing: 0.4px; }
 .annot.green { background: rgba(29,158,117,0.15); color: #1a8a60; }
-.section-label { font-size: 9px; color: rgba(0,0,0,0.3); letter-spacing: 1px; text-transform: uppercase; border-left: 2px solid rgba(128,0,32,0.4); padding-left: 6px; margin-bottom: 10px; }
+.section-label { font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 1px; text-transform: uppercase; border-left: 2px solid rgba(184,68,90,0.5); padding-left: 6px; margin-bottom: 10px; }
 
 /* NAV */
-.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; border-bottom: 0.5px solid rgba(0,0,0,0.08); background: #f0f0f0; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; border-bottom: 0.5px solid rgba(255,255,255,0.08); background: #000000; }
 .nav-logo { display: flex; align-items: center; gap: 8px; }
 .logo-box { width: 30px; height: 30px; background: #800020; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-.logo-text { font-size: 11px; font-weight: 500; color: #1a1a3e; letter-spacing: 0.3px; line-height: 1.3; }
+.logo-text { font-size: 11px; font-weight: 500; color: #ffffff; letter-spacing: 0.3px; line-height: 1.3; }
 .nav-links { display: flex; gap: 22px; }
-.nav-links a { font-size: 12px; color: rgba(0,0,0,0.5); text-decoration: none; }
-.nav-links a.active { color: #1a1a3e; border-bottom: 1.5px solid #800020; padding-bottom: 2px; }
+.nav-links a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; }
+.nav-links a.active { color: #ffffff; border-bottom: 1.5px solid #800020; padding-bottom: 2px; }
 .nav-cta { background: #800020; color: #fff; font-size: 12px; font-weight: 500; padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer; }
 
 /* HERO SLIDER */
-.hero-slider { position: relative; overflow: hidden; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+.hero-slider { position: relative; overflow: hidden; border-bottom: 0.5px solid rgba(138,142,255,0.1); }
 .hero-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); width: 400%; }
 .hero-slide { width: 25%; flex-shrink: 0; display: flex; align-items: center; padding: 52px 28px 48px; gap: 32px; min-height: 320px; }
 .hero-left { flex: 1; }
-.eyebrow-pill { display: inline-block; font-size: 11px; color: rgba(0,0,0,0.45); border: 0.5px solid rgba(0,0,0,0.15); border-radius: 20px; padding: 4px 14px; margin-bottom: 16px; }
-.hero-h1 { font-size: 30px; font-weight: 500; color: #1a1a3e; line-height: 1.2; margin-bottom: 14px; }
+.eyebrow-pill { display: inline-block; font-size: 11px; color: rgba(255,255,255,0.6); border: 0.5px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 14px; margin-bottom: 16px; }
+.hero-h1 { font-size: 30px; font-weight: 500; color: #ffffff; line-height: 1.2; margin-bottom: 14px; }
 .hero-h1 span { color: #800020; }
 .hero-sub { font-size: 14px; font-weight: 400; color: #800020; margin-bottom: 8px; letter-spacing: 0.3px; }
-.hero-body { font-size: 12px; color: rgba(0,0,0,0.5); line-height: 1.8; margin-bottom: 24px; max-width: 380px; }
+.hero-body { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; max-width: 380px; }
 .hero-btns { display: flex; gap: 10px; }
 .btn-primary { background: #800020; color: #fff; font-size: 12px; font-weight: 500; padding: 10px 22px; border-radius: 7px; border: none; cursor: pointer; }
-.btn-outline { background: transparent; color: rgba(0,0,0,0.6); font-size: 12px; padding: 10px 22px; border-radius: 7px; border: 0.5px solid rgba(0,0,0,0.2); cursor: pointer; }
-.hero-right { width: 180px; height: 180px; border-radius: 50%; background: rgba(26,26,62,0.06); border: 0.5px solid rgba(26,26,62,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.btn-outline { background: transparent; color: rgba(255,255,255,0.7); font-size: 12px; padding: 10px 22px; border-radius: 7px; border: 0.5px solid rgba(255,255,255,0.3); cursor: pointer; }
+.hero-right { width: 260px; height: 260px; border-radius: 24px; background: rgba(100,110,255,0.06); border: 0.5px solid rgba(100,110,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; overflow: hidden; }
+.hero-wave { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 120%; height: 100%; opacity: 0.4; z-index: 1; }
+.hero-right img { position: relative; z-index: 2; }
 
 .slider-controls { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 0 28px 20px; }
-.slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.15); cursor: pointer; border: none; padding: 0; transition: all 0.3s ease; }
+.slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; border: none; padding: 0; transition: all 0.3s ease; }
 .slider-dot.active { background: #800020; width: 24px; border-radius: 4px; }
-.slider-arrow { width: 30px; height: 30px; border-radius: 50%; border: 0.5px solid rgba(0,0,0,0.15); background: transparent; color: rgba(0,0,0,0.4); font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
+.slider-arrow { width: 30px; height: 30px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.5); font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
 .slider-arrow:hover { border-color: #800020; color: #800020; }
 
 /* PARTNERS */
-.partners-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.3); border-radius: 14px; padding: 24px 28px; overflow: hidden; }
+.partners-card { background: #000a1f; border: 0.5px solid rgba(138,142,255,0.2); border-radius: 14px; padding: 24px 28px; overflow: hidden; }
 .partners-top { text-align: center; margin-bottom: 20px; }
 .p-eyebrow { font-size: 10px; color: #b8445a; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px; }
-.p-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 4px; }
-.p-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
+.p-title { font-size: 15px; font-weight: 500; color: #ffffff; margin-bottom: 4px; }
+.p-sub { font-size: 11px; color: rgba(255,255,255,0.5); }
 .p-divider { width: 30px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 .logo-marquee { overflow: hidden; position: relative; mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%); }
 .logo-track { display: flex; gap: 14px; width: max-content; animation: marquee 20s linear infinite; }
@@ -64,35 +65,213 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 
 /* SECTIONS COMMON */
 .sec-heading { text-align: center; margin-bottom: 24px; }
-.sec-heading h2 { font-size: 20px; font-weight: 500; color: #1a1a3e; margin-bottom: 6px; }
-.sec-heading p { font-size: 12px; color: rgba(0,0,0,0.4); }
+.sec-heading h2 { font-size: 20px; font-weight: 500; color: #ffffff; margin-bottom: 6px; }
+.sec-heading p { font-size: 12px; color: rgba(255,255,255,0.5); }
 .sec-heading .u-line { width: 32px; height: 2px; background: #800020; border-radius: 2px; margin: 10px auto 0; }
 
 /* SERVICES */
-:root {
-  --cards: 6;
-  --cardHeight: 520px;
-  --cardMargin: 3vw;
-}
-
 .services-wrapper {
   width: 100%;
-  background: #1a1a3e;
-  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #000a1f;
   padding: 40px 28px;
   position: relative;
   border-radius: 14px;
-  border: 0.5px solid rgba(26,26,62,0.3);
+  border: 0.5px solid rgba(138,142,255,0.2);
   overflow: clip;
 }
 
 .services-content {
   width: 90%;
   margin: 0 auto;
+}
+
+.sec-heading-services {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sec-heading-services h2 {
+  font-size: 28px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.sec-heading-services p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 16px;
+  letter-spacing: 0.2px;
+}
+
+.sec-heading-services .u-line {
+  width: 40px;
+  height: 2px;
+  background: #b8445a;
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+.services-grid {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 40px;
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background: #fbfbfc;
+  border: 0.5px solid rgba(138,142,255,0.2);
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: #cccccc;
+  background: #800020;
+  box-shadow: 0 8px 24px rgba(255, 253, 253, 0.2);
+}
+
+.service-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  background: rgba(138, 142, 255, 0.12);
+  border: #ffffff;
+}
+
+.service-icon-box.icon-red { color: #b8445a; }
+.service-icon-box.icon-blue { color: #5b9fd3; }
+.service-icon-box.icon-teal { color: #4dbab0; }
+
+.service-category {
+  font-size: 11px;
+  font-weight: 600;
+  color: #b8445a;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.service-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #0c0c0c;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+
+.service-description {
+  font-size: 13px;
+  color: rgba(21, 21, 21, 0.7);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.service-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #b8445a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.service-link:hover { gap: 12px; }
+
+.service-link-icon {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #b8445a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* ABOUT US — transparent card */
+.about-wrapper {
+  width: 100%;
+  background: transparent;                          /* ← changed from #eff0f0 */
+  padding: 48px 28px;
+  border-radius: 14px;
+  border: 0.5px solid rgba(138,142,255,0.2);
+  overflow: clip;
+}
+
+.about-wrapper .about-content {
+  background: transparent;
+  padding: 40px;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-image {
+  width: 100%;
+  height: 380px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(138, 142, 255, 0.1) 0%, rgba(75, 85, 156, 0.06) 100%);
+  border: 1px solid rgba(138, 142, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-text .sec-heading-services { text-align: left; }
+
+.about-text .sec-heading-services h2 {
+  color: #ffffff;                                   /* ← white to show on dark bg */
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.about-text .sec-heading-services p {
+  color: rgba(255,255,255,0.6);                     /* ← adjusted for dark bg */
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.about-text .sec-heading-services .u-line { margin: 0; }
+
+.about-description {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);                    /* ← adjusted for dark bg */
+  line-height: 1.8;
+  margin-top: 8px;
+  text-align: justify;
 }
 
 /* SIDEBAR NAVIGATION */
@@ -148,190 +327,63 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   opacity: 1;
 }
 
-/* CARDS CONTAINER */
-#cards {
-  list-style: none;
-  padding-left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--cardMargin);
-  padding-bottom: 100px;
-}
-
-.card {
-  position: sticky;
-  top: 60px;
-  padding-top: 0;
-}
-
-#card1 { z-index: 10; }
-#card2 { z-index: 20; }
-#card3 { z-index: 30; }
-#card4 { z-index: 40; }
-#card5 { z-index: 50; }
-#card6 { z-index: 60; }
-
-#card1 .card-body { background-color: #12122e; }
-#card2 .card-body { background-color: #5c0018; }
-#card3 .card-body { background-color: #f5f5f5; color: #1a1a3e; }
-#card4 .card-body { background-color: #185FA5; }
-#card5 .card-body { background-color: #4f5ec0; }
-#card6 .card-body { background-color: #12122e; }
-
-/* CARD SPLIT LAYOUT */
-.card-body {
-  box-sizing: border-box;
-  padding: 40px;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  height: var(--cardHeight);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  color: #fff;
-  /* ✅ Smooth transitions for stacking effect transforms */
-  transition: transform 0.15s ease, opacity 0.15s ease, filter 0.15s ease;
-  overflow: hidden;
-  transform-origin: top center;
-  will-change: transform, opacity, filter;
-}
-
-/* Card Left Side */
-.card-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-}
-
-.card-body h2 {
-  font-size: 2.2em;
-  font-weight: 500;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.card-tag {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-}
-
-#card3 .card-tag {
-  background: rgba(26, 26, 62, 0.08);
-  border-color: rgba(26, 26, 62, 0.15);
-  color: rgba(26, 26, 62, 0.7);
-}
-
-.card-body p {
-  font-size: 13px;
-  line-height: 1.7;
-  opacity: 0.85;
-  margin: 0;
-  max-width: 100%;
-}
-
-/* Card Right Side */
-.card-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  min-height: 400px;
-}
-
-.card-mockup {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 12px;
-  text-align: center;
-  padding: 20px;
-}
-
-#card3 .card-mockup {
-  background: linear-gradient(135deg, rgba(26,26,62,0.05) 0%, rgba(26,26,62,0.02) 100%);
-  color: rgba(26, 26, 62, 0.2);
-}
-
 /* NEWS */
 .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
-.news-card { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 12px; overflow: hidden; }
-.news-img { height: 80px; background: #252550; display: flex; align-items: center; justify-content: center; }
+.news-card { background: #000a1f; border: 0.5px solid rgba(138,142,255,0.15); border-radius: 12px; overflow: hidden; }
+.news-img { height: 80px; background: #666666; display: flex; align-items: center; justify-content: center; }
 .news-img-inner { width: 36px; height: 36px; border-radius: 8px; background: rgba(55,138,221,0.15); border: 0.5px solid rgba(55,138,221,0.2); }
 .news-body { padding: 12px; }
 .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 .news-tag { font-size: 9px; font-weight: 500; padding: 2px 7px; border-radius: 4px; }
 .news-tag.tech { background: rgba(55,138,221,0.2); color: #6aa8e0; }
 .news-tag.insight { background: rgba(29,158,117,0.2); color: #5DCAA5; }
-.news-date { font-size: 10px; color: rgba(255,255,255,0.3); }
-.news-title { font-size: 12px; font-weight: 500; color: #fff; margin-bottom: 6px; line-height: 1.4; }
-.news-excerpt { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 10px; }
+.news-date { font-size: 10px; color: rgba(255,255,255,0.4); }
+.news-title { font-size: 12px; font-weight: 500; color: #ffffff; margin-bottom: 6px; line-height: 1.4; }
+.news-excerpt { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 10px; }
 .news-read { font-size: 11px; color: #b8445a; font-weight: 500; }
 
 /* TESTIMONIALS */
-.testi-bg { background: #1a1a3e; border: 0.5px solid rgba(26,26,62,0.2); border-radius: 14px; padding: 28px; }
+.testi-bg { background: #000a1f; border: 0.5px solid rgba(138,142,255,0.15); border-radius: 14px; padding: 28px; }
 .testi-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
-.testi-card { background: #222255; border: 0.5px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; }
+.testi-card { background: #dadadb; border: 0.5px solid rgba(138,142,255,0.15); border-radius: 10px; padding: 16px; }
 .testi-stars { display: flex; gap: 3px; margin-bottom: 10px; }
 .star { width: 12px; height: 12px; background: #EF9F27; border-radius: 2px; }
-.testi-quote { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+.testi-quote { font-size: 11px; color: rgba(20, 20, 20, 0.6); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
 .testi-divider { height: 0.5px; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
 .testi-person { display: flex; align-items: center; gap: 8px; }
 .testi-avatar { width: 28px; height: 28px; border-radius: 50%; background: #800020; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 500; flex-shrink: 0; }
-.testi-name { font-size: 11px; font-weight: 500; color: #fff; }
-.testi-role { font-size: 10px; color: rgba(255,255,255,0.4); }
+.testi-name { font-size: 11px; font-weight: 500; color: #131313; }
+.testi-role { font-size: 10px; color: rgba(31, 31, 31, 0.4); }
 
 /* CLIENTS */
-.tabs { display: flex; border-bottom: 0.5px solid rgba(0,0,0,0.1); margin-bottom: 20px; }
-.tab { font-size: 12px; padding: 9px 18px; color: rgba(0,0,0,0.4); cursor: pointer; border-bottom: 2px solid transparent; }
-.tab.active { color: #1a1a3e; border-bottom-color: #800020; }
+.tabs { display: flex; border-bottom: 0.5px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
+.tab { font-size: 12px; padding: 9px 18px; color: rgba(255,255,255,0.5); cursor: pointer; border-bottom: 2px solid transparent; }
+.tab.active { color: #ffffff; border-bottom-color: #800020; }
 .clients-row { display: flex; gap: 10px; align-items: center; }
-.scroll-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid rgba(0,0,0,0.15); background: transparent; color: rgba(0,0,0,0.4); font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+.scroll-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.5); font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
 .clients-logos { display: flex; gap: 10px; flex: 1; overflow: hidden; }
-.client-logo-card { background: #1a1a3e; border-radius: 10px; padding: 12px 18px; min-width: 90px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.client-logo-text { font-size: 11px; font-weight: 700; color: #fff; }
+.client-logo-card { background: #f5f5f5; border-radius: 10px; padding: 12px 18px; min-width: 90px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.client-logo-text { font-size: 11px; font-weight: 700; color: #1a1a3e; }
 .clients-dots { display: flex; gap: 5px; justify-content: center; margin-top: 16px; }
-.dot-ind { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.15); }
+.dot-ind { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); }
 .dot-ind.active { background: #800020; width: 18px; border-radius: 3px; }
 
 /* FOOTER */
-.footer { background: #12122e; border-top: 0.5px solid rgba(26,26,62,0.3); padding: 36px 28px 20px; }
+.footer { background: #000a1f; border-top: 0.5px solid rgba(138,142,255,0.15); padding: 36px 28px 20px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1.2fr 1fr 1fr 1.2fr; gap: 20px; margin-bottom: 28px; }
 .footer-col-title { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 12px; }
 .footer-link { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 7px; }
 .footer-contact { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 7px; }
 .footer-icon { width: 14px; height: 14px; background: rgba(128,0,32,0.25); border-radius: 3px; flex-shrink: 0; }
 .social-row { display: flex; gap: 8px; margin-top: 4px; }
-.social-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(255,255,255,0.5); }
+.social-btn { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(255,255,255,0.5); text-decoration: none; transition: all 0.3s ease; }
+.social-btn:hover { border-color: #800020; color: #800020; background: rgba(128,0,32,0.1); }
 .newsletter-row { display: flex; gap: 6px; }
 .newsletter-input { flex: 1; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 8px 10px; font-size: 11px; color: rgba(255,255,255,0.5); }
 .newsletter-btn { background: #800020; color: #fff; font-size: 11px; font-weight: 500; padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; white-space: nowrap; }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 0.5px solid rgba(255,255,255,0.08); padding-top: 16px; }
 .footer-bottom span { font-size: 11px; color: rgba(255,255,255,0.35); }
-.section-pad { padding: 28px 24px 0; }
+.section-pad { padding: 28px 24px 0; background: #000a1f; }
 
 /* BACK TO TOP */
 .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 40px; height: 40px; border-radius: 50%; background: #800020; border: none; color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; box-shadow: 0 4px 12px rgba(128,0,32,0.3); z-index: 100; }
@@ -343,14 +395,11 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
 <div class="page">
 
   <!-- NAV -->
-  <div style="padding: 0 24px 0; background:#f0f0f0;">
+  <div style="padding: 0 24px 0; background:#000000;">
     <div style="padding: 8px 0 4px;"><span class="section-label">Navigation</span></div>
     <div class="nav" style="padding: 12px 0;">
       <div class="nav-logo">
-        <div class="logo-box">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L8 3L13 8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3V14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div class="logo-text">INVENTIONS<br>TECHNOLOGIES</div>
+        <img src="download.png" alt="Inventions Technologies" style="height: 35px; width: auto;">
       </div>
       <div class="nav-links">
         <a href="#" class="active">Home</a>
@@ -364,6 +413,7 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   </div>
 
   <!-- HERO SLIDER -->
+  <div class="wave-divider"></div>
   <div style="padding: 0 24px;">
     <div style="padding: 8px 0 4px;">
       <span class="section-label">Hero section</span>
@@ -384,16 +434,10 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             </div>
           </div>
           <div class="hero-right">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-              <circle cx="50" cy="50" r="42" stroke="#378ADD" stroke-width="0.8" opacity="0.5"/>
-              <ellipse cx="50" cy="50" rx="22" ry="42" stroke="#378ADD" stroke-width="0.6" opacity="0.35"/>
-              <line x1="8" y1="50" x2="92" y2="50" stroke="#378ADD" stroke-width="0.6" opacity="0.35"/>
-              <line x1="50" y1="8" x2="50" y2="92" stroke="#378ADD" stroke-width="0.6" opacity="0.2"/>
-              <circle cx="50" cy="50" r="3" fill="#378ADD" opacity="0.8"/>
-              <circle cx="68" cy="32" r="2" fill="#378ADD" opacity="0.5"/>
-              <circle cx="30" cy="65" r="1.5" fill="#378ADD" opacity="0.4"/>
-              <circle cx="72" cy="60" r="1.5" fill="#378ADD" opacity="0.3"/>
+            <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="#001a66"/>
             </svg>
+            <img src="technologyprovider.avif" alt="Technology Provider" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
           </div>
         </div>
 
@@ -406,19 +450,13 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             <p class="hero-body">Transform the way your teams connect with cutting-edge video conferencing solutions. Crystal-clear audio, HD video, and seamless screen sharing bring your distributed workforce together.</p>
             <div class="hero-btns">
               <button class="btn-primary">Explore Solutions</button>
-              <button class="btn-outline">Watch Demo</button>
             </div>
           </div>
           <div class="hero-right">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-              <rect x="18" y="25" width="64" height="40" rx="4" stroke="#1a1a3e" stroke-width="1" opacity="0.6"/>
-              <rect x="24" y="30" width="22" height="15" rx="2" fill="#800020" opacity="0.15" stroke="#800020" stroke-width="0.5"/>
-              <rect x="54" y="30" width="22" height="15" rx="2" fill="#1a1a3e" opacity="0.1" stroke="#1a1a3e" stroke-width="0.5"/>
-              <rect x="24" y="50" width="22" height="10" rx="2" fill="#1a1a3e" opacity="0.1" stroke="#1a1a3e" stroke-width="0.5"/>
-              <rect x="54" y="50" width="22" height="10" rx="2" fill="#1a1a3e" opacity="0.1" stroke="#1a1a3e" stroke-width="0.5"/>
-              <path d="M42 75L50 68L58 75" stroke="#800020" stroke-width="0.8" opacity="0.5"/>
-              <circle cx="50" cy="80" r="3" fill="#800020" opacity="0.2"/>
+            <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="#001a66"/>
             </svg>
+            <img src="collaboration.jpg" alt="Collaboration" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
           </div>
         </div>
 
@@ -435,12 +473,10 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             </div>
           </div>
           <div class="hero-right">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-              <path d="M50 15L80 30V55C80 72 65 85 50 90C35 85 20 72 20 55V30L50 15Z" stroke="#1a1a3e" stroke-width="1" opacity="0.5" fill="none"/>
-              <path d="M50 22L74 34V55C74 68 62 79 50 84C38 79 26 68 26 55V34L50 22Z" fill="#800020" opacity="0.06"/>
-              <path d="M42 52L48 58L60 44" stroke="#800020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
-              <circle cx="50" cy="50" r="18" stroke="#1a1a3e" stroke-width="0.6" opacity="0.2" stroke-dasharray="3 3"/>
+            <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="#001a66"/>
             </svg>
+            <img src="security.jpg" alt="Security" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
           </div>
         </div>
 
@@ -453,23 +489,14 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
             <p class="hero-body">Empower your customer service teams with our modern call center platforms. Featuring smart call routing, real-time analytics, and omni-channel support to deliver exceptional customer experiences at scale.</p>
             <div class="hero-btns">
               <button class="btn-primary">Get Started</button>
-              <button class="btn-outline">Request Demo</button>
+              <button class="btn-outline">Learn More</button>
             </div>
           </div>
           <div class="hero-right">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-              <circle cx="50" cy="40" r="12" stroke="#1a1a3e" stroke-width="1" opacity="0.5"/>
-              <circle cx="50" cy="37" r="4" fill="#1a1a3e" opacity="0.2"/>
-              <path d="M42 44C42 44 44 48 50 48C56 48 58 44 58 44" stroke="#1a1a3e" stroke-width="0.8" opacity="0.3"/>
-              <path d="M30 38C30 38 32 30 30 24" stroke="#800020" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
-              <path d="M70 38C70 38 68 30 70 24" stroke="#800020" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
-              <path d="M28 40A24 24 0 0 1 32 28" stroke="#800020" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-              <path d="M72 40A24 24 0 0 0 68 28" stroke="#800020" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-              <rect x="32" y="60" width="36" height="18" rx="4" stroke="#1a1a3e" stroke-width="0.8" opacity="0.4"/>
-              <circle cx="40" cy="69" r="3" fill="#800020" opacity="0.15" stroke="#800020" stroke-width="0.5"/>
-              <circle cx="50" cy="69" r="3" fill="#800020" opacity="0.15" stroke="#800020" stroke-width="0.5"/>
-              <circle cx="60" cy="69" r="3" fill="#800020" opacity="0.15" stroke="#800020" stroke-width="0.5"/>
+            <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="#001a66"/>
             </svg>
+            <img src="callcenter.avif" alt="Call Center" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
           </div>
         </div>
 
@@ -484,6 +511,137 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
       <button class="slider-arrow" onclick="slideHero(1)">&#8250;</button>
     </div>
   </div>
+
+  <div class="wave-divider"></div>
+
+  <!-- ABOUT US -->
+  <div style="padding: 24px 24px 0;">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">About Us</span>
+    </div>
+    <div class="about-wrapper">
+      <div class="about-content">
+        <div class="about-image">
+          <img src="about2.jpg" alt="About Inventions Technologies" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="about-text">
+          <div class="sec-heading-services">
+            <h2>About Us</h2>
+            <p>Founded in 2010, Inventions Technologies has been a trusted partner in delivering innovative IT solutions</p>
+            <div class="u-line"></div>
+          </div>
+          <p class="about-description">With over a decade of experience, we specialize in comprehensive IT solutions including unified communications, network infrastructure, cybersecurity, and custom software development. Our mission is to empower businesses through cutting-edge technology and exceptional service. We pride ourselves on understanding your unique challenges and delivering tailored solutions that drive real business value. Our team of certified professionals is committed to your success, providing 24/7 support and continuous innovation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div style="padding: 24px 24px 0;">
+    <div style="padding: 0 0 6px;">
+      <span class="section-label">Services section</span>
+      <span class="annot" style="margin-left:8px;">Improved — icon-based, arrow moved to bottom</span>
+    </div>
+    <div class="services-wrapper">
+      <div class="services-content">
+        <div class="sec-heading-services">
+          <h2>Our services</h2>
+          <p>Comprehensive IT solutions tailored to your business needs</p>
+          <div class="u-line"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon-box icon-red">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="10"/>
+                <path d="M13 16h6M16 13v6"/>
+              </svg>
+            </div>
+            <div class="service-category">UC & AV</div>
+            <h3 class="service-title">Unified Communication & Audiovisual</h3>
+            <p class="service-description">Seamless communication environments and immersive audiovisual experiences that connect teams.</p>
+            <a class="service-link"><span>Learn more</span><div class="service-link-icon">→</div></a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-box icon-blue">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="10" width="16" height="14" rx="2"/>
+                <path d="M12 10V8c0-1 .5-2 1.5-2h5c1 0 1.5 1 1.5 2v2"/>
+                <line x1="12" y1="17" x2="20" y2="17"/>
+              </svg>
+            </div>
+            <div class="service-category">SECURITY</div>
+            <h3 class="service-title">Networking and Security</h3>
+            <p class="service-description">Robust network infrastructure and comprehensive security services ensuring seamless operations.</p>
+            <a class="service-link"><span>Learn more</span><div class="service-link-icon">→</div></a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-box icon-teal">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="8" width="20" height="16" rx="2"/>
+                <line x1="10" y1="8" x2="10" y2="24"/>
+                <line x1="22" y1="8" x2="22" y2="24"/>
+                <path d="M14 15h4"/>
+              </svg>
+            </div>
+            <div class="service-category">DEVELOPMENT</div>
+            <h3 class="service-title">Software Development</h3>
+            <p class="service-description">Innovative software solutions that drive business growth and efficiency, tailored to unique needs.</p>
+            <a class="service-link"><span>Learn more</span><div class="service-link-icon">→</div></a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-box icon-teal">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="8" width="20" height="16" rx="2"/>
+                <line x1="10" y1="8" x2="10" y2="24"/>
+                <line x1="22" y1="8" x2="22" y2="24"/>
+                <path d="M14 15h4"/>
+              </svg>
+            </div>
+            <div class="service-category">DEVELOPMENT</div>
+            <h3 class="service-title">Software Development</h3>
+            <p class="service-description">Innovative software solutions that drive business growth and efficiency, tailored to unique needs.</p>
+            <a class="service-link"><span>Learn more</span><div class="service-link-icon">→</div></a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-box icon-teal">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="8" width="20" height="16" rx="2"/>
+                <line x1="10" y1="8" x2="10" y2="24"/>
+                <line x1="22" y1="8" x2="22" y2="24"/>
+                <path d="M14 15h4"/>
+              </svg>
+            </div>
+            <div class="service-category">DEVELOPMENT</div>
+            <h3 class="service-title">Software Development</h3>
+            <p class="service-description">Innovative software solutions that drive business growth and efficiency, tailored to unique needs.</p>
+            <a class="service-link"><span>Learn more</span><div class="service-link-icon">→</div></a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-box icon-teal">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="8" width="20" height="16" rx="2"/>
+                <line x1="10" y1="8" x2="10" y2="24"/>
+                <line x1="22" y1="8" x2="22" y2="24"/>
+                <path d="M14 15h4"/>
+              </svg>
+            </div>
+            <div class="service-category">DEVELOPMENT</div>
+            <h3 class="service-title">Software Development</h3>
+            <p class="service-description">Innovative software solutions that drive business growth and efficiency, tailored to unique needs.</p>
+            <a class="service-link"><span>Learn more</span><div class="service-link-icon">→</div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wave-divider"></div>
 
   <!-- PARTNERS -->
   <div style="padding: 24px 24px 0;">
@@ -500,239 +658,111 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
       </div>
       <div class="logo-marquee">
         <div class="logo-track">
-          <div class="logo-pill hi">Extron</div>
-          <div class="logo-pill hi">Lenovo</div>
-          <div class="logo-pill">Grandstream</div>
-          <div class="logo-pill">Gonsin</div>
+          <div class="logo-pill hi">Fortinet</div>
+          <div class="logo-pill hi">Cisco</div>
+          <div class="logo-pill">Sophos</div>
+          <div class="logo-pill">Crowdstrike</div>
+          <div class="logo-pill">SentinelOne</div>
+          <div class="logo-pill">Microsoft</div>
+          <div class="logo-pill">Darktrace</div>
+          <div class="logo-pill">Tenable</div>
+          <div class="logo-pill">Symantec</div>
           <div class="logo-pill">ManageEngine</div>
-          <div class="logo-pill">Xorcom</div>
+          <div class="logo-pill">Huawei</div>
+          <div class="logo-pill">Solarwinds</div>
+          <div class="logo-pill">Kaspersky</div>
+          <div class="logo-pill">Thales</div>
+          <div class="logo-pill">Imperva</div>
+          <div class="logo-pill">Paloalto</div>
+          <div class="logo-pill">Splunk</div>
+          <div class="logo-pill">Odoo</div>
+          <div class="logo-pill">Commvault</div>
+          <div class="logo-pill hi">Dell</div>
+          <div class="logo-pill">Veeam</div>
           <div class="logo-pill hi">HP</div>
-          <div class="logo-pill hi">Extron</div>
           <div class="logo-pill hi">Lenovo</div>
+          <div class="logo-pill">QueueMetrics</div>
+          <div class="logo-pill">Yeastar</div>
+          <div class="logo-pill">Xcally</div>
           <div class="logo-pill">Grandstream</div>
-          <div class="logo-pill">Gonsin</div>
-          <div class="logo-pill">ManageEngine</div>
+          <div class="logo-pill">Poly</div>
           <div class="logo-pill">Xorcom</div>
-          <div class="logo-pill hi">HP</div>
+          <div class="logo-pill hi">Extron</div>
+          <div class="logo-pill hi">Fortinet</div>
+          <div class="logo-pill hi">Cisco</div>
+          <div class="logo-pill">Sophos</div>
+          <div class="logo-pill">Crowdstrike</div>
+          <div class="logo-pill">SentinelOne</div>
+          <div class="logo-pill">Microsoft</div>
+          <div class="logo-pill">Darktrace</div>
+          <div class="logo-pill">Tenable</div>
+          <div class="logo-pill">Symantec</div>
+          <div class="logo-pill">ManageEngine</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SERVICES -->
-  <div style="padding: 24px 24px 0;"><div style="padding: 0 0 6px;"><span class="section-label">Services section</span></div></div>
-  <div style="padding: 0 24px 24px;">
-  <div class="services-wrapper" id="servicesWrapper">
-    <div style="text-align:center; margin-bottom:32px;">
-      <div class="p-eyebrow">What we do</div>
-      <div class="p-title" style="font-size:18px;">Our Services</div>
-      <div class="p-sub">Comprehensive IT solutions tailored for your business</div>
-      <div class="p-divider"></div>
-    </div>
-    <div class="services-content">
-      <!-- SIDEBAR NAVIGATION -->
-      <nav class="side-nav" id="sideNav">
-        <div class="nav-indicator active" data-card="card1">
-          <div class="nav-circle"></div>
-          <span class="nav-label">IT Strategy</span>
-        </div>
-        <div class="nav-indicator" data-card="card2">
-          <div class="nav-circle"></div>
-          <span class="nav-label">Network</span>
-        </div>
-        <div class="nav-indicator" data-card="card3">
-          <div class="nav-circle"></div>
-          <span class="nav-label">Security</span>
-        </div>
-        <div class="nav-indicator" data-card="card4">
-          <div class="nav-circle"></div>
-          <span class="nav-label">Cloud</span>
-        </div>
-        <div class="nav-indicator" data-card="card5">
-          <div class="nav-circle"></div>
-          <span class="nav-label">AV &amp; Comms</span>
-        </div>
-        <div class="nav-indicator" data-card="card6">
-          <div class="nav-circle"></div>
-          <span class="nav-label">ERP &amp; CRM</span>
-        </div>
-      </nav>
-
-      <!-- CARDS CONTAINER -->
-      <ul id="cards">
-        <li class="card" id="card1" data-color="#12122e">
-          <div class="card-body">
-            <div class="card-left">
-              <div>
-                <div class="annot green">Digital Transformation</div>
-                <h2>IT Strategy &amp; Consulting</h2>
-                <div class="card-tags">
-                  <span class="card-tag">Strategy</span>
-                  <span class="card-tag">Consulting</span>
-                </div>
-              </div>
-              <p>We help organizations navigate the complex digital landscape with tailored IT strategies that drive growth and efficiency.</p>
-            </div>
-            <div class="card-right">
-              <div class="card-mockup">Strategy &amp; Consulting Mockup</div>
-            </div>
-          </div>
-        </li>
-        <li class="card" id="card2" data-color="#5c0018">
-          <div class="card-body">
-            <div class="card-left">
-              <div>
-                <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Infrastructure</div>
-                <h2>Network Integration</h2>
-                <div class="card-tags">
-                  <span class="card-tag">Network</span>
-                  <span class="card-tag">Infrastructure</span>
-                  <span class="card-tag">24/7 Support</span>
-                </div>
-              </div>
-              <p>Robust, scalable, and secure network solutions designed to keep your business connected 24/7 without interruptions.</p>
-            </div>
-            <div class="card-right">
-              <div class="card-mockup">Network Integration Dashboard</div>
-            </div>
-          </div>
-        </li>
-        <li class="card" id="card3" data-color="#e8e8e8">
-          <div class="card-body">
-            <div class="card-left">
-              <div>
-                <div class="annot green">Security</div>
-                <h2>Cyber Security</h2>
-                <div class="card-tags">
-                  <span class="card-tag">Protection</span>
-                  <span class="card-tag">Defense</span>
-                  <span class="card-tag">Monitoring</span>
-                </div>
-              </div>
-              <p>Multi-layered defense systems to protect your critical data and infrastructure from evolving global cyber threats.</p>
-            </div>
-            <div class="card-right">
-              <div class="card-mockup">Security Dashboard</div>
-            </div>
-          </div>
-        </li>
-        <li class="card" id="card4" data-color="#185FA5">
-          <div class="card-body">
-            <div class="card-left">
-              <div>
-                <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Cloud</div>
-                <h2>Cloud Solutions</h2>
-                <div class="card-tags">
-                  <span class="card-tag">Migration</span>
-                  <span class="card-tag">Management</span>
-                  <span class="card-tag">Scalability</span>
-                </div>
-              </div>
-              <p>Seamless migration and management of cloud environments to enhance collaboration and reduce operational costs.</p>
-            </div>
-            <div class="card-right">
-              <div class="card-mockup">Cloud Management Platform</div>
-            </div>
-          </div>
-        </li>
-        <li class="card" id="card5" data-color="#4f5ec0">
-          <div class="card-body">
-            <div class="card-left">
-              <div>
-                <div class="annot" style="background:rgba(255,255,255,0.1); color:#fff;">Hardware</div>
-                <h2>AV &amp; Unified Comms</h2>
-                <div class="card-tags">
-                  <span class="card-tag">Audio-Visual</span>
-                  <span class="card-tag">Unified Comms</span>
-                  <span class="card-tag">Meetings</span>
-                </div>
-              </div>
-              <p>State-of-the-art audio-visual setups and unified communication platforms for modern meeting rooms and remote teams.</p>
-            </div>
-            <div class="card-right">
-              <div class="card-mockup">AV Setup Configuration</div>
-            </div>
-          </div>
-        </li>
-        <li class="card" id="card6" data-color="#4E4E6E">
-          <div class="card-body">
-            <div class="card-left">
-              <div>
-                <div class="annot green">Software</div>
-                <h2>ERP &amp; CRM Systems</h2>
-                <div class="card-tags">
-                  <span class="card-tag">Odoo ERP</span>
-                  <span class="card-tag">CRM</span>
-                  <span class="card-tag">Business Process</span>
-                </div>
-              </div>
-              <p>Comprehensive Odoo ERP and CRM implementations to streamline your business processes and customer relationships.</p>
-            </div>
-            <div class="card-right">
-              <div class="card-mockup">Odoo ERP Interface</div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  </div><!-- end services outer -->
+  <div class="wave-divider"></div>
 
   <!-- NEWS -->
-  <div class="section-pad">
+  <div style="padding: 24px 24px 0;">
     <div style="padding: 0 0 6px;">
       <span class="section-label">News &amp; updates</span>
       <span class="annot" style="margin-left:8px;">IMPROVE — proper "Read more" links</span>
     </div>
-    <div class="sec-heading">
-      <h2>News and updates</h2>
-      <p>Latest insights, tech news and company announcements</p>
-      <div class="u-line"></div>
-    </div>
-    <div class="news-grid">
-      <div class="news-card">
-        <div class="news-img"><div class="news-img-inner" style="background:rgba(100,80,40,0.3);border-color:rgba(180,140,60,0.2);"></div></div>
-        <div class="news-body">
-          <div class="news-meta"><span class="news-tag insight">In Sights</span><span class="news-date">01 July, 2024</span></div>
-          <div class="news-title">Odoo Roadshow 2024 – Dar Es Salaam</div>
-          <div class="news-excerpt">Discover the new features Odoo 17 offers and how it can help digitalise your company.</div>
-          <div class="news-read">Read more →</div>
-        </div>
+    <div style="background:#000a1f; border:0.5px solid rgba(138,142,255,0.2); border-radius:14px; padding:32px 28px;">
+      <div class="sec-heading">
+        <h2>News and updates</h2>
+        <p>Latest insights, tech news and company announcements</p>
+        <div class="u-line"></div>
       </div>
-      <div class="news-card">
-        <div class="news-img"><div class="news-img-inner"></div></div>
-        <div class="news-body">
-          <div class="news-meta"><span class="news-tag tech">Tech News</span><span class="news-date">01 July, 2024</span></div>
-          <div class="news-title">Why 2-factor authentication?</div>
-          <div class="news-excerpt">Safeguarding sensitive information has become critical as cyber threats continue to evolve.</div>
-          <div class="news-read">Read more →</div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-img"><div class="news-img-inner" style="background:rgba(100,80,40,0.3);border-color:rgba(180,140,60,0.2);"></div></div>
+          <div class="news-body">
+            <div class="news-meta"><span class="news-tag insight">In-Sights</span><span class="news-date">01 July, 2024</span></div>
+            <div class="news-title">Odoo Roadshow 2024 – Dar Es Salaam</div>
+            <div class="news-excerpt">Discover the new features Odoo 17 offers and how it can help digitalise your company.</div>
+            <div class="news-read">Read more →</div>
+          </div>
         </div>
-      </div>
-      <div class="news-card">
-        <div class="news-img"><div class="news-img-inner" style="background:rgba(40,60,100,0.3);border-color:rgba(60,100,180,0.2);"></div></div>
-        <div class="news-body">
-          <div class="news-meta"><span class="news-tag insight">In Sights</span><span class="news-date">01 July, 2024</span></div>
-          <div class="news-title">Odoo ERP and CRM Software: Everything You Need to Know</div>
-          <div class="news-excerpt">Businesses are seeking powerful tools to improve operational efficiency and customer connections.</div>
-          <div class="news-read">Read more →</div>
+        <div class="news-card">
+          <div class="news-img"><div class="news-img-inner"></div></div>
+          <div class="news-body">
+            <div class="news-meta"><span class="news-tag tech">Tech News</span><span class="news-date">01 July, 2024</span></div>
+            <div class="news-title">Why 2-factor authentication?</div>
+            <div class="news-excerpt">Safeguarding sensitive information has become critical as cyber threats continue to evolve.</div>
+            <div class="news-read">Read more →</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img"><div class="news-img-inner" style="background:rgba(40,60,100,0.3);border-color:rgba(60,100,180,0.2);"></div></div>
+          <div class="news-body">
+            <div class="news-meta"><span class="news-tag insight">In-Sights</span><span class="news-date">01 July, 2024</span></div>
+            <div class="news-title">Odoo ERP and CRM Software: Everything You Need to Know</div>
+            <div class="news-excerpt">Businesses are seeking powerful tools to improve operational efficiency and customer connections.</div>
+            <div class="news-read">Read more →</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div class="wave-divider"></div>
+
   <!-- TESTIMONIALS -->
-  <div class="section-pad">
+  <div style="padding: 24px 24px 0;">
     <div style="padding: 0 0 6px;">
       <span class="section-label">Testimonials</span>
       <span class="annot" style="margin-left:8px;">IMPROVE — 3 cards, neutral background</span>
     </div>
-    <div class="sec-heading">
-      <h2>What our clients say</h2>
-      <p>Real feedback from businesses we've helped transform</p>
-      <div class="u-line"></div>
-    </div>
-    <div class="testi-bg">
+    <div style="background:#000a1f; border:0.5px solid rgba(138,142,255,0.2); border-radius:14px; padding:32px 28px;">
+      <div class="sec-heading">
+        <h2>What our clients say</h2>
+        <p>Real feedback from businesses we've helped transform</p>
+        <div class="u-line"></div>
+      </div>
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
@@ -766,63 +796,89 @@ body { background: #f5f5f5; padding: 24px; font-family: -apple-system, BlinkMacS
   </div>
 
   <!-- CLIENTS -->
-  <div class="section-pad">
+  <div style="padding: 24px 24px 0;">
     <div style="padding: 0 0 6px;">
       <span class="section-label">Our clients</span>
-      <span class="annot" style="margin-left:8px;">IMPROVE — scroll arrows + pagination dots</span>
+      <span class="annot" style="margin-left:8px;">IMPROVE — scroll arrows + pagination dots + automatic scrolling</span>
     </div>
-    <div class="sec-heading">
-      <h2>Some of our clients</h2>
-      <p>Trusted by leading organisations across Tanzania and beyond</p>
-      <div class="u-line"></div>
-    </div>
-    <div class="tabs">
-      <div class="tab active">Banks</div>
-      <div class="tab">Government</div>
-      <div class="tab">Telecom</div>
-      <div class="tab">Others</div>
-    </div>
-    <div class="clients-row">
-      <button class="scroll-btn">&#8249;</button>
-      <div class="clients-logos">
-        <div class="client-logo-card"><div class="client-logo-text">NMB</div></div>
-        <div class="client-logo-card"><div class="client-logo-text">NBC</div></div>
-        <div class="client-logo-card"><div class="client-logo-text">CRDB</div></div>
-        <div class="client-logo-card"><div class="client-logo-text">BOA</div></div>
-        <div class="client-logo-card"><div class="client-logo-text">EXIM</div></div>
+    <div style="background:#000a1f; border:0.5px solid rgba(138,142,255,0.2); border-radius:14px; padding:32px 28px;">
+      <div class="sec-heading">
+        <h2>Some of our clients</h2>
+        <p>Trusted by leading organisations across Tanzania and beyond</p>
+        <div class="u-line"></div>
       </div>
-      <button class="scroll-btn">&#8250;</button>
-    </div>
-    <div class="clients-dots">
-      <div class="dot-ind active"></div>
-      <div class="dot-ind"></div>
-      <div class="dot-ind"></div>
+      <div class="tabs">
+        <div class="tab active" onclick="switchClientTab(0)">Banks</div>
+        <div class="tab" onclick="switchClientTab(1)">Government</div>
+        <div class="tab" onclick="switchClientTab(2)">Telecom</div>
+        <div class="tab" onclick="switchClientTab(3)">Others</div>
+      </div>
+      <div class="clients-row">
+        <button class="scroll-btn" onclick="scrollClientLogos(-1)">&#8249;</button>
+        <div class="clients-logos" id="clientsLogos-0">
+          <div class="client-logo-card"><div class="client-logo-text">NMB</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">NBC</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">CRDB</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">BOA</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">EXIM</div></div>
+        </div>
+        <div class="clients-logos" id="clientsLogos-1" style="display:none;">
+          <div class="client-logo-card"><div class="client-logo-text">TCRA</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">BOT</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">Judiciary</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">NAOT</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">PCCB</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">Tanesco</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">EWURA</div></div>
+        </div>
+        <div class="clients-logos" id="clientsLogos-2" style="display:none;">
+          <div class="client-logo-card"><div class="client-logo-text">Tigo</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">TTCL</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">Airtel</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">Vodacom</div></div>
+        </div>
+        <div class="clients-logos" id="clientsLogos-3" style="display:none;">
+          <div class="client-logo-card"><div class="client-logo-text">Bowmans</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">British Business Group</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">Ifakara Health Institute</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">Tembo Nickel</div></div>
+          <div class="client-logo-card"><div class="client-logo-text">PWC</div></div>
+        </div>
+        <button class="scroll-btn" onclick="scrollClientLogos(1)">&#8250;</button>
+      </div>
+      <div class="clients-dots">
+        <div class="dot-ind active"></div>
+        <div class="dot-ind"></div>
+        <div class="dot-ind"></div>
+      </div>
     </div>
   </div>
+
+  <div class="wave-divider"></div>
 
   <!-- FOOTER -->
   <div style="padding: 28px 24px 0;">
     <div style="padding: 0 0 6px;">
       <span class="section-label">Footer</span>
-      <span class="annot" style="margin-left:8px;">IMPROVE — higher contrast text</span>
+      <span class="annot" style="margin-left:8px;">IMPROVE — higher contrast text + hover effects + social links</span>
     </div>
   </div>
   <div class="footer">
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-          <div class="logo-box" style="width:28px;height:28px;">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L8 3L13 8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3V14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="nav-logo">
+            <img src="download.png" alt="Inventions Technologies" style="height: 35px; width: auto;">
           </div>
-          <div class="logo-text" style="color:#fff;">INVENTIONS<br>TECHNOLOGIES</div>
+          <!-- <div class="logo-text" style="color:#fff;">INVENTIONS<br>TECHNOLOGIES</div> -->
         </div>
         <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:14px;">Your trusted IT solutions partner since 2010.</div>
         <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px;">Our social links</div>
         <div class="social-row">
-          <div class="social-btn">f</div>
-          <div class="social-btn">in</div>
-          <div class="social-btn">X</div>
-          <div class="social-btn">ig</div>
+          <a href="https://web.facebook.com/inventectz" target="_blank" class="social-btn">f</a>
+          <a href="https://www.linkedin.com/company/13268668" target="_blank" class="social-btn">in</a>
+          <a href="https://twitter.com/InventionsTech1" target="_blank" class="social-btn">X</a>
+          <a href="https://www.instagram.com/inventectz/" target="_blank" class="social-btn">ig</a>
         </div>
       </div>
       <div>
@@ -904,83 +960,55 @@ function resetAutoSlide() {
 
 resetAutoSlide();
 
-// ─── Services: Sticky stacking cards, sidebar sync, background transition ───
-(function() {
-  var servicesWrapper = document.getElementById('servicesWrapper');
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
-  var navIndicators = Array.prototype.slice.call(document.querySelectorAll('.nav-indicator'));
+// ─── Auto-scrolling Clients Section ──────────────────────────────────────────
+var currentClientTab = 0;
+var totalClientTabs = 4;
+var autoClientTimer;
 
-  if (!servicesWrapper || cards.length === 0) return;
-
-  // Sidebar click → scroll to card
-  navIndicators.forEach(function(indicator) {
-    indicator.addEventListener('click', function() {
-      var cardId = this.getAttribute('data-card');
-      var card = document.getElementById(cardId);
-      if (card) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-  });
-
-  function onScroll() {
-    var activeCard = null;
-    var activeColor = '#f0f0f0';
-
-    // ✅ FIX #2: Track which card is active (visible near top of viewport)
-    // and only compress cards that have been PASSED (next card is entering view)
-    cards.forEach(function(card) {
-      var rect = card.getBoundingClientRect();
-      // Card is considered "active" if its top half is in the upper viewport
-      if (rect.top < window.innerHeight * 0.55 && rect.bottom > 0) {
-        activeCard = card;
-        activeColor = card.getAttribute('data-color') || '#f0f0f0';
-      }
-    });
-
-    // Smoothly transition background colour of the services section
-    servicesWrapper.style.backgroundColor = activeColor;
-
-    // Update sidebar dot indicators
-    navIndicators.forEach(function(indicator) {
-      var isActive = activeCard && indicator.getAttribute('data-card') === activeCard.id;
-      indicator.classList.toggle('active', !!isActive);
-    });
-
-    // ✅ FIX #2 (continued): Apply stacking compression only when the NEXT card
-    // starts pushing the current one — the active card stays full size.
-    cards.forEach(function(card, i) {
-      var cardBody = card.querySelector('.card-body');
-      if (!cardBody) return;
-
-      var nextCard = cards[i + 1];
-      var progress = 0;
-
-      if (nextCard) {
-        var nextRect = nextCard.getBoundingClientRect();
-        // Start compressing once the next card is within 80% of viewport height
-        var triggerPoint = window.innerHeight * 0.8;
-        if (nextRect.top < triggerPoint) {
-          progress = Math.min(1, (triggerPoint - nextRect.top) / 400);
-        }
-      }
-
-      // Subtle but visible stacking compression
-      var scale      = 1 - (progress * 0.06);
-      var translateY = progress * -12;
-      var opacity    = 1 - (progress * 0.2);
-      var blur       = progress * 1.5;
-
-      cardBody.style.transform = 'scale(' + scale + ') translateY(' + translateY + 'px)';
-      cardBody.style.opacity   = String(opacity);
-      cardBody.style.filter    = blur > 0.05 ? 'blur(' + blur + 'px)' : 'none';
-    });
+function switchClientTab(tabIndex) {
+  currentClientTab = tabIndex;
+  
+  // Hide all client logo containers
+  for (var i = 0; i < totalClientTabs; i++) {
+    var container = document.getElementById('clientsLogos-' + i);
+    if (container) container.style.display = 'none';
   }
+  
+  // Show selected tab
+  var selectedContainer = document.getElementById('clientsLogos-' + tabIndex);
+  if (selectedContainer) selectedContainer.style.display = 'flex';
+  
+  // Update tab styling
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(tab, i) {
+    tab.classList.toggle('active', i === tabIndex);
+  });
+  
+  // Update pagination dots
+  var dots = document.querySelectorAll('.dot-ind');
+  dots.forEach(function(dot, i) {
+    dot.classList.toggle('active', i === tabIndex);
+  });
+  
+  // Reset auto-scroll timer
+  resetClientAutoScroll();
+}
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  // Run once on load to set initial state
-  onScroll();
-})();
+function nextClientTab() {
+  switchClientTab((currentClientTab + 1) % totalClientTabs);
+}
+
+function scrollClientLogos(direction) {
+  switchClientTab((currentClientTab + direction + totalClientTabs) % totalClientTabs);
+}
+
+function resetClientAutoScroll() {
+  clearInterval(autoClientTimer);
+  autoClientTimer = setInterval(nextClientTab, 5000);
+}
+
+// Initialize auto-scroll
+resetClientAutoScroll();
 
 // ─── Back to Top ─────────────────────────────────────────────────────────────
 var backToTopBtn = document.getElementById('backToTop');
