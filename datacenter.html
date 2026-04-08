@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datacenter Infrastructure — Inventions Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #000000;
+  --black2:  #0A0A0A;
+  --navy:    #1C1C3A;
+  --navy2:   #16162E;
+  --red:     #C0262A;
+  --white:   #FFFFFF;
+  --gray:    #AAAAAA;
+  --gray2:   #666666;
+  --border:  rgba(255,255,255,0.10);
+  --font:    'Poppins', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--black); color: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--black);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  height: 65px;
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 100%;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 42px; height: 42px; flex-shrink: 0; }
+.logo-icon svg { width: 42px; height: 42px; }
+.logo-text .l1 { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; line-height: 1.3; }
+.logo-text .l2 { display: block; font-size: 10px; font-weight: 400; letter-spacing: 0.10em; text-transform: uppercase; color: var(--gray); }
+
+.nav-links { display: flex; align-items: center; gap: 0; list-style: none; }
+.nav-links > li { position: static; }
+.nav-links > li > a {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0.4rem 1.1rem;
+  font-size: 14px; font-weight: 400; color: var(--white);
+  transition: color 0.2s;
+}
+.nav-links > li > a:hover { color: rgba(255,255,255,0.7); }
+.chevron-icon {
+  width: 8px; height: 8px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s; display: inline-block; flex-shrink: 0;
+}
+.services-item:hover > a .chevron-icon { transform: rotate(225deg) translateY(2px); }
+
+/* HORIZONTAL MEGA MENU */
+.mega-wrap {
+  display: none;
+  position: fixed; left: 0; right: 0; top: 65px;
+  background: #111111;
+  border-top: 2px solid var(--red);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  z-index: 999;
+  animation: menuIn 0.18s ease;
+}
+@keyframes menuIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+.services-item:hover .mega-wrap { display: block; }
+
+.mega-grid {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mega-grid-row2 {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.mega-item {
+  padding: 1.4rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer; transition: background 0.2s;
+  position: relative;
+}
+.mega-item:last-child { border-right: none; }
+.mega-item:hover { background: rgba(255,255,255,0.04); }
+.mega-item.is-active { background: rgba(192,38,42,0.08); border-bottom: 2px solid var(--red); }
+.mega-item h4 { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.mega-item p  { font-size: 11.5px; font-weight: 300; color: var(--gray); line-height: 1.55; }
+
+.nav-cta {
+  background: var(--red); color: var(--white);
+  padding: 0.5rem 1.4rem; border-radius: 4px;
+  font-size: 13px; font-weight: 600;
+  transition: background 0.2s; white-space: nowrap; flex-shrink: 0;
+}
+.nav-cta:hover { background: #a8202a; }
+
+/* ── HERO ── */
+.hero {
+  padding-top: 65px;
+  background: var(--black);
+  min-height: 92vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+  align-items: center;
+}
+.hero-left-accent {
+  position: absolute; top: 0; left: 0;
+  width: 340px; height: 100%;
+  background: linear-gradient(140deg, rgba(150,15,15,0.6) 0%, rgba(100,5,5,0.2) 40%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.hero-image-col {
+  position: relative; z-index: 1;
+  padding: 4rem 2rem 4rem 4rem;
+  display: flex; align-items: center;
+}
+.hero-image-frame {
+  width: 100%; max-width: 490px;
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+.hero-image-frame img {
+  width: 100%; height: 440px; object-fit: cover; display: block;
+  filter: brightness(0.88);
+}
+.hero-content-col {
+  position: relative; z-index: 1;
+  padding: 4rem 4rem 4rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-content-col h1 {
+  font-size: clamp(1.9rem, 3.2vw, 3rem);
+  font-weight: 700; line-height: 1.2; color: var(--white);
+  margin-bottom: 1.5rem;
+}
+.hero-content-col p {
+  font-size: 14px; font-weight: 300; color: var(--gray);
+  line-height: 1.9; margin-bottom: 2rem; max-width: 46ch;
+}
+.hero-btn {
+  display: inline-block;
+  background: var(--red); color: var(--white);
+  padding: 0.65rem 1.75rem; border-radius: 4px;
+  font-size: 14px; font-weight: 500;
+  transition: background 0.2s; align-self: flex-start;
+}
+.hero-btn:hover { background: #a8202a; }
+
+/* ── TABS ── */
+.tabs-bar {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.tabs-bar::-webkit-scrollbar { display: none; }
+.tabs-inner { max-width: 1280px; margin: 0 auto; display: flex; }
+.tab-btn {
+  flex: 1; min-width: 145px;
+  padding: 1rem 0.75rem;
+  font-size: 12px; font-weight: 500; font-family: var(--font);
+  color: var(--gray); text-transform: uppercase; letter-spacing: 0.07em;
+  background: none; border: none; border-right: 1px solid var(--border);
+  cursor: pointer; transition: color 0.2s, background 0.2s;
+  text-align: center; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn:hover { color: var(--white); background: rgba(255,255,255,0.02); }
+.tab-btn.active { color: var(--white); border-bottom-color: var(--red); }
+
+/* ── SHARED ── */
+.section-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 0.75rem; }
+.section-title { font-size: clamp(1.7rem,3vw,2.5rem); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 1rem; }
+.section-lead { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.85; max-width: 58ch; }
+
+/* ── SOLUTIONS ── */
+.solutions-section { background: var(--black); padding: 5.5rem 0; }
+.solutions-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border); margin-top: 3.5rem;
+}
+.sol-card {
+  padding: 2.25rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.sol-card:hover { background: rgba(255,255,255,0.02); }
+.sol-card:nth-child(3n) { border-right: none; }
+.sol-card:nth-child(n+4) { border-bottom: none; }
+.sol-num { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: var(--red); margin-bottom: 1rem; }
+.sol-card h3 { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 0.75rem; }
+.sol-card p  { font-size: 13px; font-weight: 300; color: var(--gray); line-height: 1.75; }
+
+/* ── SPECS ── */
+.specs-section { 
+  background: transparent;
+  padding: 5.5rem 2rem;
+}
+.specs-section .section-inner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.specs-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+.specs-left h2 { font-size: clamp(1.7rem,3vw,2.5rem); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 1rem; }
+.specs-left p { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.85; margin-bottom: 2rem; }
+.btn-outline {
+  display: inline-block; border: 1px solid var(--red); color: var(--white);
+  padding: 0.6rem 1.5rem; border-radius: 4px;
+  font-size: 13px; font-weight: 500; transition: background 0.2s;
+}
+.btn-outline:hover { background: var(--red); }
+.spec-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 1rem;
+}
+.spec-row:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+.spec-label { font-size: 13px; font-weight: 400; color: var(--gray); }
+.spec-value { font-size: 13px; font-weight: 600; color: var(--white); text-align: right; }
+.spec-value span { color: var(--red); }
+
+/* ── PROCESS ── */
+.process-section { background: var(--black); padding: 5.5rem 0; }
+.process-header { text-align: center; margin-bottom: 4rem; }
+.process-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  position: relative;
+}
+.process-steps::before {
+  content: ''; position: absolute; top: 31px;
+  left: calc(10% + 8px); right: calc(10% + 8px);
+  height: 1px; background: rgba(255,255,255,0.1); z-index: 0;
+}
+.p-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+.p-num {
+  width: 62px; height: 62px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: var(--white);
+  margin-bottom: 1.25rem; transition: border-color 0.2s, background 0.2s;
+}
+.p-step:hover .p-num { border-color: var(--red); background: rgba(192,38,42,0.08); }
+.p-step h4 { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+.p-step p  { font-size: 12px; font-weight: 300; color: var(--gray); line-height: 1.65; }
+
+/* ── CTA ── */
+.cta-section { 
+  background: transparent;
+  padding: 5.5rem 2rem;
+}
+.cta-section .section-inner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.cta-flex { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.cta-text h2 { font-size: clamp(1.4rem,2.5vw,2rem); font-weight: 700; color: var(--white); }
+.cta-text p  { font-size: 14px; font-weight: 300; color: var(--gray); margin-top: 0.5rem; }
+.cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.cta-btns .primary {
+  background: var(--red); color: var(--white);
+  padding: 0.65rem 1.75rem; border-radius: 4px;
+  font-size: 13px; font-weight: 600; transition: background 0.2s;
+}
+.cta-btns .primary:hover { background: #a8202a; }
+.cta-btns .secondary {
+  color: var(--white); font-size: 13px; font-weight: 400;
+  border: 1px solid rgba(255,255,255,0.2); padding: 0.65rem 1.5rem; border-radius: 4px;
+  transition: border-color 0.2s;
+}
+.cta-btns .secondary:hover { border-color: rgba(255,255,255,0.5); }
+
+/* ── FOOTER ── */
+footer { 
+  background: #000a1f;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 4rem 0 0;
+}
+.footer-grid {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem 3.5rem;
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1.4fr;
+  gap: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-brand p { font-size: 13px; font-weight: 300; color: var(--gray); line-height: 1.75; margin: 1rem 0 1.25rem; }
+.footer-brand .soc-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 0.75rem; }
+.socials { display: flex; gap: 9px; }
+.s-icon {
+  width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--gray);
+  transition: border-color 0.2s, color 0.2s; cursor: pointer;
+}
+.s-icon:hover { border-color: var(--red); color: var(--white); }
+.footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--white); margin-bottom: 1.25rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.6rem; }
+.footer-col ul li a { font-size: 13px; font-weight: 300; color: var(--gray); transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--white); }
+.contact-row { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 0.65rem; font-size: 13px; font-weight: 300; color: var(--gray); }
+.contact-row svg { width: 13px; height: 13px; stroke: var(--red); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 2px; }
+.footer-col p { font-size: 13px; font-weight: 300; color: var(--gray); line-height: 1.65; margin-bottom: 1rem; }
+.nl-form { display: flex; }
+.nl-form input {
+  flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-right: none; padding: 0.55rem 0.9rem; color: var(--white);
+  font-size: 12px; font-family: var(--font); border-radius: 3px 0 0 3px; outline: none;
+}
+.nl-form input::placeholder { color: rgba(255,255,255,0.3); }
+.nl-form input:focus { border-color: rgba(192,38,42,0.5); }
+.nl-form button {
+  background: var(--red); border: none; color: var(--white);
+  padding: 0 1rem; font-size: 11px; font-weight: 700; font-family: var(--font);
+  letter-spacing: 0.06em; cursor: pointer; border-radius: 0 3px 3px 0;
+  transition: background 0.2s;
+}
+.nl-form button:hover { background: #a8202a; }
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto; padding: 1.25rem 2rem;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+}
+.footer-bottom p { font-size: 12px; font-weight: 300; color: var(--gray2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-image-col { display: none; }
+  .hero-content-col { padding: 5rem 2rem; }
+  .solutions-grid { grid-template-columns: 1fr 1fr; }
+  .specs-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .process-steps::before { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .mega-grid, .mega-grid-row2 { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<!-- <nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="21,1 41,11 41,31 21,41 1,31 1,11" fill="none" stroke="#C0262A" stroke-width="1.5"/>
+          <polygon points="21,5 37,13 37,29 21,37 5,29 5,13" fill="#1C1C3A" stroke="#3030A0" stroke-width="0.8"/>
+          <circle cx="21" cy="21" r="7" stroke="#C0262A" stroke-width="1.5" fill="none"/>
+          <circle cx="21" cy="21" r="2.5" fill="#C0262A"/>
+          <line x1="21" y1="5" x2="21" y2="14" stroke="#C0262A" stroke-width="1.2"/>
+          <line x1="21" y1="28" x2="21" y2="37" stroke="#C0262A" stroke-width="1.2"/>
+          <line x1="5" y1="21" x2="14" y2="21" stroke="#C0262A" stroke-width="1.2"/>
+          <line x1="28" y1="21" x2="37" y2="21" stroke="#C0262A" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="l1">Inventions</span>
+        <span class="l2">Technologies</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li class="services-item">
+        <a href="#">Services <span class="chevron-icon"></span></a>
+        <div class="mega-wrap">
+          <div class="mega-grid">
+            <a href="#" class="mega-item is-active">
+              <h4>Datacenter Infrastructure</h4>
+              <p>Data center design, colocation &amp; managed hosting</p>
+            </a>
+            <a href="#" class="mega-item">
+              <h4>Network and Security</h4>
+              <p>Network integration, firewall &amp; cybersecurity solutions</p>
+            </a>
+            <a href="#" class="mega-item">
+              <h4>Software Development</h4>
+              <p>Custom enterprise software &amp; application development</p>
+            </a>
+            <a href="#" class="mega-item">
+              <h4>Business Outsourcing</h4>
+              <p>IT staffing, helpdesk &amp; managed business services</p>
+            </a>
+          </div>
+          <div class="mega-grid-row2">
+            <a href="#" class="mega-item">
+              <h4>Unified Communication &amp; AV</h4>
+              <p>Collaboration systems &amp; audio-visual installations</p>
+            </a>
+            <a href="#" class="mega-item">
+              <h4>Equipment Maintenance</h4>
+              <p>Preventive maintenance &amp; 24/7 technical support</p>
+            </a>
+            <a href="#" class="mega-item">
+              <h4>Leasing &amp; Selling of ICT Products</h4>
+              <p>Flexible ICT product leasing &amp; procurement</p>
+            </a>
+            <a href="#" class="mega-item">
+              <h4>Tailored Solutions</h4>
+              <p>Bespoke ICT solutions designed for your specific needs</p>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#">Blogs</a></li>
+      <li><a href="#">Career</a></li>
+    </ul>
+
+    <a href="#" class="nav-cta">Contact Us</a>
+  </div>
+</nav> -->
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-left-accent"></div>
+
+  <div class="hero-image-col">
+    <div class="hero-image-frame">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80" alt="Datacenter operations">
+    </div>
+  </div>
+
+  <div class="hero-content-col">
+    <h1>Datacenter Infrastructure</h1>
+    <p>At Inventions Technologies, we specialize in comprehensive data center and infrastructure solutions tailored to meet the evolving needs of modern businesses. Our suite of services is designed to optimize, secure, and streamline your data operations, ensuring unparalleled reliability and performance.</p>
+    <a href="#" class="hero-btn">Contact Us</a>
+  </div>
+</section>
+
+<!-- ══ TABS ══ -->
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn active">Colocation</button>
+    <button class="tab-btn">Cloud Infrastructure</button>
+    <button class="tab-btn">Physical Security</button>
+    <button class="tab-btn">Power &amp; Cooling</button>
+    <button class="tab-btn">Connectivity</button>
+    <button class="tab-btn">NOC Monitoring</button>
+    <button class="tab-btn">Maintenance</button>
+  </div>
+</div>
+
+<!-- ══ SOLUTIONS ══ -->
+<section class="solutions-section">
+  <div class="section-inner">
+    <p class="eyebrow">What We Offer</p>
+    <h2 class="section-title">End-to-End Datacenter<br>Infrastructure Services</h2>
+    <p class="section-lead">From initial design through ongoing management, our certified engineers deliver integrated solutions that keep your critical systems running at full capacity.</p>
+
+    <div class="solutions-grid">
+      <div class="sol-card">
+        <div class="sol-num">01</div>
+        <h3>Server Colocation</h3>
+        <p>Premium rack space with redundant power, cooling, and physical security in Tier III certified facilities across East Africa.</p>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">02</div>
+        <h3>Hybrid Cloud Architecture</h3>
+        <p>Seamlessly integrate on-premises infrastructure with public cloud platforms for maximum flexibility and operational cost efficiency.</p>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">03</div>
+        <h3>Physical Security Systems</h3>
+        <p>Multi-layer access control, CCTV surveillance, biometric authentication, and round-the-clock on-site security personnel.</p>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">04</div>
+        <h3>Power &amp; UPS Systems</h3>
+        <p>Redundant UPS, generator backup, and intelligent PDU management ensuring zero-downtime power continuity at all times.</p>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">05</div>
+        <h3>Precision Cooling</h3>
+        <p>Hot/cold aisle containment, CRAC units, and liquid cooling solutions designed for high-density compute environments.</p>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">06</div>
+        <h3>24/7 NOC Monitoring</h3>
+        <p>Proactive network operations center with real-time alerting, performance dashboards, and SLA-backed rapid response times.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPECS ══ -->
+<section class="specs-section">
+  <div class="section-inner">
+    <div class="specs-layout">
+      <div class="specs-left">
+        <p class="eyebrow">Technical Specifications</p>
+        <h2>Built to Enterprise Grade</h2>
+        <p>Our infrastructure meets the highest international standards for availability, security, and environmental controls — certified for the most demanding enterprise workloads.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#" class="hero-btn">Request Datasheet</a>
+          <a href="#" class="btn-outline">View Certifications</a>
+        </div>
+      </div>
+      <div>
+        <div class="spec-row"><span class="spec-label">Uptime Guarantee</span><span class="spec-value"><span>99.982%</span> SLA</span></div>
+        <div class="spec-row"><span class="spec-label">Power Redundancy</span><span class="spec-value"><span>2N+1</span> Redundant</span></div>
+        <div class="spec-row"><span class="spec-label">Generator Backup</span><span class="spec-value"><span>72-hour</span> Fuel Reserve</span></div>
+        <div class="spec-row"><span class="spec-label">Temperature Control</span><span class="spec-value"><span>18–27°C</span> Precision</span></div>
+        <div class="spec-row"><span class="spec-label">PUE Rating</span><span class="spec-value"><span>1.35</span> Target</span></div>
+        <div class="spec-row"><span class="spec-label">Bandwidth Capacity</span><span class="spec-value">Up to <span>100 Gbps</span></span></div>
+        <div class="spec-row"><span class="spec-label">Domestic Latency</span><span class="spec-value"><span>&lt;5 ms</span></span></div>
+        <div class="spec-row"><span class="spec-label">Access Control</span><span class="spec-value"><span>Biometric</span> + Card</span></div>
+        <div class="spec-row"><span class="spec-label">Certifications</span><span class="spec-value"><span>ISO 27001</span>, TIA-942</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="process-section">
+  <div class="section-inner">
+    <div class="process-header">
+      <p class="eyebrow">How It Works</p>
+      <h2 class="section-title">Our Delivery Process</h2>
+    </div>
+    <div class="process-steps">
+      <div class="p-step">
+        <div class="p-num">01</div>
+        <h4>Discovery &amp; Audit</h4>
+        <p>Assess current infrastructure, capacity needs, and business objectives</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">02</div>
+        <h4>Solution Design</h4>
+        <p>Architect a tailored data center blueprint with full technical specifications</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">03</div>
+        <h4>Procurement</h4>
+        <p>Source and deliver certified hardware with full warranty and documentation</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">04</div>
+        <h4>Deployment</h4>
+        <p>Professional installation, cabling, and system integration with zero disruption</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">05</div>
+        <h4>Managed Support</h4>
+        <p>Ongoing 24/7 monitoring, maintenance, and SLA-backed helpdesk</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="section-inner">
+    <div class="cta-flex">
+      <div class="cta-text">
+        <h2>Ready to modernize your infrastructure?</h2>
+        <p>Speak with our engineers and get a customized assessment — no commitment required.</p>
+      </div>
+      <div class="cta-btns">
+        <a href="tel:+255222775873" class="primary">Call Us Now</a>
+        <a href="mailto:info@it.co.tz" class="secondary">Send an Enquiry</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="margin-bottom:1rem;display:inline-flex;">
+        <div class="nav-logo">
+            <img src="download.png" alt="Inventions Technologies" style="height: 35px; width: auto;">
+        </div>
+        <!-- <div class="logo-text" style="margin-left:10px;">
+          <span class="l1">Inventions</span>
+          <span class="l2">Technologies</span>
+        </div> -->
+      </a>
+      <p>Delivering world-class ICT infrastructure solutions across East Africa — from data centers to unified communications and beyond.</p>
+      <div class="soc-label">Our Social Links</div>
+      <div class="socials">
+        <div class="s-icon">f</div>
+        <div class="s-icon">ig</div>
+        <div class="s-icon">x</div>
+        <div class="s-icon">in</div>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Useful Links</h4>
+      <ul>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">UC and AV</a></li>
+        <li><a href="#">Network Integration</a></li>
+        <li><a href="#">Cyber Security</a></li>
+        <li><a href="#">POV and Demos</a></li>
+        <li><a href="#">System Design and Development</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>About Us</h4>
+      <ul>
+        <li><a href="#">Who We Are</a></li>
+        <li><a href="#">Our Ambition &amp; Values</a></li>
+        <li><a href="#">Visit Our Online Store</a></li>
+        <li><a href="#">Our Locations</a></li>
+        <li><a href="#">Our Partners</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.99 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +255 22 277 5873
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.99 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +255 746 985 750
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.99 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +255 754 710 702
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.99 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +255 757 579 684
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@it.co.tz
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        P.O.Box 34647
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Subscribe Our Newsletter</h4>
+      <p>Stay updated with our latest solutions and technology insights.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="Email">
+        <button>Subscribe</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>Copyright © 2026 IT. All rights reserved. &nbsp;·&nbsp; VAT reg number: 111-443-025</p>
+    <p>Registered address &nbsp;·&nbsp; 202 Lukuledi, Regent Estate, Dar es Salaam</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

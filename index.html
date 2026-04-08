@@ -17,14 +17,130 @@ body { background: #000000; padding: 24px; font-family: -apple-system, BlinkMacS
 .section-label { font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 1px; text-transform: uppercase; border-left: 2px solid rgba(184,68,90,0.5); padding-left: 6px; margin-bottom: 10px; }
 
 /* NAV */
-.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; border-bottom: 0.5px solid rgba(255,255,255,0.08); background: #000000; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; border-bottom: 0.5px solid rgba(255,255,255,0.08); background: #000000; position: relative; z-index: 100; }
 .nav-logo { display: flex; align-items: center; gap: 8px; }
 .logo-box { width: 30px; height: 30px; background: #800020; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
 .logo-text { font-size: 11px; font-weight: 500; color: #ffffff; letter-spacing: 0.3px; line-height: 1.3; }
-.nav-links { display: flex; gap: 22px; }
-.nav-links a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; }
+.nav-links { display: flex; gap: 22px; align-items: center; }
+.nav-links a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; transition: all 0.2s ease; padding: 6px 0; }
+.nav-links a:hover { color: #ffffff; }
 .nav-links a.active { color: #ffffff; border-bottom: 1.5px solid #800020; padding-bottom: 2px; }
-.nav-cta { background: #800020; color: #fff; font-size: 12px; font-weight: 500; padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer; }
+.nav-cta { background: #800020; color: #fff; font-size: 12px; font-weight: 500; padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer; transition: all 0.2s ease; }
+.nav-cta:hover { background: #b8445a; box-shadow: 0 4px 12px rgba(128, 0, 32, 0.25); }
+
+/* DROPDOWN MENU FOR SERVICES */
+.services-item { position: relative; list-style: none; }
+.services-item > a { display: flex; align-items: center; gap: 6px; position: relative; }
+.chevron-icon { display: inline-block; width: 12px; height: 12px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.chevron-icon::before { content: '▼'; font-size: 8px; color: rgba(255,255,255,0.5); }
+.services-item:hover > a { color: #ffffff; }
+.services-item:hover > a .chevron-icon { transform: rotate(180deg); }
+
+/* HORIZONTAL MEGA MENU */
+.mega-wrap {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  width: 920px;
+  background: linear-gradient(180deg, #0a0a15 0%, #000a1f 100%);
+  border-top: 2px solid #800020;
+  border-bottom: 1px solid rgba(138, 142, 255, 0.15);
+  border-radius: 0 0 8px 8px;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  animation: menuIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  margin-top: 6px;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.services-item:hover .mega-wrap {
+  display: block;
+}
+
+.mega-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.mega-grid-row2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 16px 16px;
+  border-top: 1px solid rgba(138, 142, 255, 0.1);
+}
+
+.mega-item {
+  display: block;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(138, 142, 255, 0.1);
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mega-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 0, 32, 0.08);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.mega-item:hover::before {
+  left: 0;
+}
+
+.mega-item:hover {
+  border-color: #800020;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(128, 0, 32, 0.2);
+}
+
+.mega-item h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.mega-item p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+}
+
+.mega-item.is-active {
+  background: rgba(128, 0, 32, 0.1);
+  border-color: #800020;
+}
+
+.mega-item.is-active h4 {
+  color: #b8445a;
+}
 
 /* HERO SLIDER */
 .hero-slider { position: relative; overflow: hidden; border-bottom: 0.5px solid rgba(138,142,255,0.1); }
@@ -396,17 +512,60 @@ body { background: #000000; padding: 24px; font-family: -apple-system, BlinkMacS
 
   <!-- NAV -->
   <div style="padding: 0 24px 0; background:#000000;">
-    <div style="padding: 8px 0 4px;"><span class="section-label">Navigation</span></div>
+    <div style="padding: 8px 0 4px;"><span class="section-label">Navigation</span>
+      <span class="annot green" style="margin-left:8px;">update — navigation to include horizontal dropdown menu</span>
+    </div>
     <div class="nav" style="padding: 12px 0;">
       <div class="nav-logo">
         <img src="download.png" alt="Inventions Technologies" style="height: 35px; width: auto;">
       </div>
       <div class="nav-links">
         <a href="#" class="active">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Blogs</a>
-        <a href="#">Career</a>
+        <a href="aboutUs.html">About</a>
+        <li class="services-item">
+          <a href="#">Services <span class="chevron-icon"></span></a>
+          <div class="mega-wrap">
+            <div class="mega-grid">
+            <a href="datacenter.html" class="mega-item is-active">
+              <h4>Datacenter Infrastructure</h4>
+              <p>Data center design, colocation &amp; managed hosting</p>
+            </a>
+            <a href="network-security.html" class="mega-item">
+              <h4>Network and Security</h4>
+              <p>Network integration, firewall &amp; cybersecurity solutions</p>
+            </a>
+            <a href="software-development.html" class="mega-item">
+              <h4>Software Development</h4>
+              <p>Custom enterprise software &amp; application development</p>
+            </a>
+            <a href="business-outsourcing.html" class="mega-item">
+              <h4>Business Outsourcing</h4>
+              <p>IT staffing, helpdesk &amp; managed business services</p>
+            </a>
+          </div>
+          <div class="mega-grid-row2">
+            <a href="unified-communication.html" class="mega-item">
+              <h4>Unified Communication &amp; AV</h4>
+              <p>Collaboration systems &amp; audio-visual installations</p>
+            </a>
+            <a href="equipment-maintenance.html" class="mega-item">
+              <h4>Equipment Maintenance</h4>
+              <p>Preventive maintenance &amp; 24/7 technical support</p>
+            </a>
+            <a href="leasing-selling.html" class="mega-item">
+              <h4>Leasing &amp; Selling of ICT Products</h4>
+              <p>Flexible ICT product leasing &amp; procurement</p>
+            </a>
+            <a href="tailored-solutions.html" class="mega-item">
+              <h4>Tailored Solutions</h4>
+              <p>Bespoke ICT solutions designed for your specific needs</p>
+            </a>
+          </div>
+        </div>
+      </li>
+        <a href="blogs.html">Blogs</a>
+        <!-- <a href="vendor&partners.html">Partners</a> -->
+        <a href="career.html">Career</a>
       </div>
       <button class="nav-cta">Contact Us</button>
     </div>
